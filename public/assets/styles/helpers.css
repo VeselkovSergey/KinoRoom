@@ -818,6 +818,14 @@
   color: #ff7300;
 }
 
+.color-darkred {
+  color: darkred;
+}
+
+.color-red {
+  color: red;
+}
+
 .border-orange {
   border: 1px solid #ff7300;
 }
