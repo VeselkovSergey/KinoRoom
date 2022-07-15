@@ -71,51 +71,74 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/subscription', function () {
         $subscriptionType = request('type');
 
+        $userSubscriptionEndDate = \Carbon\Carbon::parse(auth()->user()->subscription_end_date);
+
+
         if ($subscriptionType === '30') {
+
+            if (auth()->user()->checkSubscription()) {
+                $newUserSubscriptionEndDate = $userSubscriptionEndDate->addMonth()->format('Y-m-d');
+            } else {
+                $newUserSubscriptionEndDate = now()->addMonth()->format('Y-m-d');
+            }
+
             auth()->user()->update([
                 'subscription_start_date' => now()->format('Y-m-d'),
-                'subscription_end_date' => \Carbon\Carbon::parse(auth()->user()->subscription_end_date)->addMonth()->format('Y-m-d'),
+                'subscription_end_date' => $newUserSubscriptionEndDate,
             ]);
+
         } else if ($subscriptionType === '365') {
+
+            if (auth()->user()->checkSubscription()) {
+                $newUserSubscriptionEndDate = $userSubscriptionEndDate->addYear()->format('Y-m-d');
+            } else {
+                $newUserSubscriptionEndDate = now()->addYear()->format('Y-m-d');
+            }
+
             auth()->user()->update([
                 'subscription_start_date' => now()->format('Y-m-d'),
-                'subscription_end_date' => \Carbon\Carbon::parse(auth()->user()->subscription_end_date)->addYear()->format('Y-m-d'),
+                'subscription_end_date' => $newUserSubscriptionEndDate,
             ]);
+
         }
 
     })->name('subscription-request');
-
-    Route::get('/search', function () {
-        return view('search');
-    })->name('search')->middleware('auth');
 
     Route::get('/profile', function () {
         return view('profile');
     })->name('profile');
 
-    Route::get('/film', function () {
+    Route::group(['middleware' => 'subscription'], function () {
 
-        $filmId = request('id');
-        $isSerial = request('isSerial');
+        Route::get('/search', function () {
+            return view('search');
+        })->name('search')->middleware('auth');
 
-        $url = 'https://apitmdb.cub.watch/3/' . ($isSerial === 'true' ? 'tv' : 'movie') . '/' . $filmId . '?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru';
+        Route::get('/film', function () {
 
-        try {
-            $filmInfoRaw = file_get_contents($url);
-        } catch (Exception $e) {
-            return abort(404);
-        }
+            $filmId = request('id');
+            $isSerial = request('isSerial');
 
-        $filmInfo = json_decode($filmInfoRaw);
+            $url = 'https://apitmdb.cub.watch/3/' . ($isSerial === 'true' ? 'tv' : 'movie') . '/' . $filmId . '?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru';
 
-        $filmTitle = ($filmInfo->title ?? $filmInfo->name) . ' (' . ($filmInfo->release_date ?? $filmInfo->first_air_date) . ')';
-        $filmDescription = $filmInfo->overview;
+            try {
+                $filmInfoRaw = file_get_contents($url);
+            } catch (Exception $e) {
+                return abort(404);
+            }
 
-        $filmPosterUrl = $filmInfo->poster_path !== null ? 'https://imagetmdb.cub.watch/t/p/w200' . $filmInfo->poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
+            $filmInfo = json_decode($filmInfoRaw);
 
-        return view('film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
+            $filmTitle = ($filmInfo->title ?? $filmInfo->name) . ' (' . ($filmInfo->release_date ?? $filmInfo->first_air_date) . ')';
+            $filmDescription = $filmInfo->overview;
 
-    })->name('film');
+            $filmPosterUrl = $filmInfo->poster_path !== null ? 'https://imagetmdb.cub.watch/t/p/w200' . $filmInfo->poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
+
+            return view('film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
+
+        })->name('film');
+
+    });
 
 });
 
