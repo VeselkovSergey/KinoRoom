@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/git-pull', function () {
+Route::any('/git-pull', function () {
     echo '<pre>';
 // sudo -u www-data ssh-keygen - генерим ssh ключи под www-data
 // chmod 600 /var/www/.ssh/ida_rsa - для работы git pull под www-data
