@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/git-pull', function () {
+    echo '<pre>';
+// sudo -u www-data ssh-keygen - генерим ssh ключи под www-data
+// chmod 600 /var/www/.ssh/ida_rsa - для работы git pull под www-data
+    echo 'git pull start' . PHP_EOL;
+    echo shell_exec('git pull');
+    echo 'git pull complete' . PHP_EOL;
+
+    echo 'composer start' . PHP_EOL;
+    echo shell_exec('composer install');
+    echo 'composer complete' . PHP_EOL;
+    echo '</pre>';
+})->name('git-pull');
+
 Route::get('/', function () {
     if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect(\route('search'));
