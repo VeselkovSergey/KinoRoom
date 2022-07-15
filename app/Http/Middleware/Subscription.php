@@ -19,6 +19,6 @@ class Subscription
         if (auth()->user()->checkSubscription()) {
             return $next($request);
         }
-        return redirect(route('subscription'));
+        return redirect(route('profile'));
     }
 }
