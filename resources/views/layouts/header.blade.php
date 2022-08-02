@@ -7,7 +7,7 @@
 
     @if(auth()->check())
 
-    <div class="ml-a flex-center">
+    <div class="ml-a flex-center mr-10">
 
         <a class="index-buttons h-75 p-5" href="{{route('search')}}" title="избранное">
             <svg height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">

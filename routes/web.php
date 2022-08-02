@@ -28,91 +28,112 @@ Route::any('/git-pull', function () {
 })->name('git-pull');
 
 Route::get('/', function () {
-    if (\Illuminate\Support\Facades\Auth::check()) {
+//    if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect(\route('search'));
-    } else {
-        return redirect(\route('login'));
-    }
+//    } else {
+//        return redirect(\route('login'));
+//    }
 })->name('home');
 
-Route::get('/registration', function () {
-    \Illuminate\Support\Facades\Auth::logout();
-    return view('registration');
-})->name('registration');
+//Route::get('/registration', function () {
+//    \Illuminate\Support\Facades\Auth::logout();
+//    if (request('neon')) {
+//        return view('neon.registration');
+//    } else {
+//        return view('registration');
+//    }
+//
+//})->name('registration');
 
-Route::group(['prefix' => '/login'], function () {
+//Route::group(['prefix' => '/login'], function () {
+//
+//    Route::get('/', function () {
+//        if (request('neon')) {
+//            return view('neon.login');
+//        } else {
+//            return view('login');
+//        }
+//    })->name('login-page');
+//
+//    Route::post('/', function () {
+//        $user = \App\Models\User::where('email', request('login'))->firstOrFail();
+//        if (\Illuminate\Support\Facades\Hash::check(request('password'), $user->password)) {
+//            \Illuminate\Support\Facades\Auth::login($user);
+//        } else {
+//            throw new Exception('Ошибка авторизации');
+//        }
+//    })->name('login');
+//
+//});
 
-    Route::get('/', function () {
-        return view('login');
-    })->name('login-page');
+//Route::group(['middleware' => 'auth'], function () {
+//
+//    Route::get('/logout', function () {
+//        \Illuminate\Support\Facades\Auth::logout();
+//        return redirect(\route('home'));
+//    })->name('logout');
+//
+//    Route::get('/subscription', function () {
+//        return view('subscription');
+//    })->name('subscription');
+//
+//    Route::post('/subscription', function () {
+//        $subscriptionType = request('type');
+//
+//        $userSubscriptionEndDate = \Carbon\Carbon::parse(auth()->user()->subscription_end_date);
+//
+//        if ($subscriptionType === '30') {
+//
+//            if (auth()->user()->checkSubscription()) {
+//                $newUserSubscriptionEndDate = $userSubscriptionEndDate->addMonth()->format('Y-m-d');
+//            } else {
+//                $newUserSubscriptionEndDate = now()->addMonth()->format('Y-m-d');
+//            }
+//
+//            auth()->user()->update([
+//                'subscription_start_date' => now()->format('Y-m-d'),
+//                'subscription_end_date' => $newUserSubscriptionEndDate,
+//            ]);
+//
+//        } else if ($subscriptionType === '365') {
+//
+//            if (auth()->user()->checkSubscription()) {
+//                $newUserSubscriptionEndDate = $userSubscriptionEndDate->addYear()->format('Y-m-d');
+//            } else {
+//                $newUserSubscriptionEndDate = now()->addYear()->format('Y-m-d');
+//            }
+//
+//            auth()->user()->update([
+//                'subscription_start_date' => now()->format('Y-m-d'),
+//                'subscription_end_date' => $newUserSubscriptionEndDate,
+//            ]);
+//
+//        }
+//
+//    })->name('subscription-request');
+//
+//    Route::get('/profile', function () {
+//        return view('profile');
+//    })->name('profile');
 
-    Route::post('/', function () {
-        $user = \App\Models\User::where('email', request('login'))->firstOrFail();
-        if (\Illuminate\Support\Facades\Hash::check(request('password'), $user->password)) {
-            \Illuminate\Support\Facades\Auth::login($user);
-        } else {
-            throw new Exception('Ошибка авторизации');
-        }
-    })->name('login');
+//    Route::group(['middleware' => 'subscription'], function () {
 
-});
-
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/logout', function () {
-        \Illuminate\Support\Facades\Auth::logout();
-        return redirect(\route('home'));
-    })->name('logout');
-
-    Route::get('/subscription', function () {
-        return view('subscription');
-    })->name('subscription');
-
-    Route::post('/subscription', function () {
-        $subscriptionType = request('type');
-
-        $userSubscriptionEndDate = \Carbon\Carbon::parse(auth()->user()->subscription_end_date);
-
-
-        if ($subscriptionType === '30') {
-
-            if (auth()->user()->checkSubscription()) {
-                $newUserSubscriptionEndDate = $userSubscriptionEndDate->addMonth()->format('Y-m-d');
-            } else {
-                $newUserSubscriptionEndDate = now()->addMonth()->format('Y-m-d');
-            }
-
-            auth()->user()->update([
-                'subscription_start_date' => now()->format('Y-m-d'),
-                'subscription_end_date' => $newUserSubscriptionEndDate,
+        Route::get('/ref/{refer}', function ($refer) {
+            \App\Models\Refers::create([
+                'refer' => $refer,
+                'client_ip_address' => request()->server('REMOTE_ADDR')
             ]);
-
-        } else if ($subscriptionType === '365') {
-
-            if (auth()->user()->checkSubscription()) {
-                $newUserSubscriptionEndDate = $userSubscriptionEndDate->addYear()->format('Y-m-d');
-            } else {
-                $newUserSubscriptionEndDate = now()->addYear()->format('Y-m-d');
-            }
-
-            auth()->user()->update([
-                'subscription_start_date' => now()->format('Y-m-d'),
-                'subscription_end_date' => $newUserSubscriptionEndDate,
-            ]);
-
-        }
-
-    })->name('subscription-request');
-
-    Route::get('/profile', function () {
-        return view('profile');
-    })->name('profile');
-
-    Route::group(['middleware' => 'subscription'], function () {
+            return redirect(\route('home'));
+        });
 
         Route::get('/search', function () {
-            return view('search');
-        })->name('search')->middleware('auth');
+//            if (request('neon')) {
+                return view('neon.search');
+//            } else {
+//                return view('search');
+//            }
+
+        })->name('search');//->middleware('auth');
 
         Route::get('/film', function () {
 
@@ -134,13 +155,18 @@ Route::group(['middleware' => 'auth'], function () {
 
             $filmPosterUrl = $filmInfo->poster_path !== null ? 'https://imagetmdb.cub.watch/t/p/w200' . $filmInfo->poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
 
-            return view('film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
+//            if (request('neon')) {
+                return view('neon.film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
+//            } else {
+//                return view('film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
+//            }
+
 
         })->name('film');
 
-    });
+//    });
 
-});
+//});
 
 Route::get('/abort', function () {
     abort(404);
