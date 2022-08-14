@@ -16,7 +16,8 @@
         }
 
         .container-2 {
-            height: 350px
+            height: 350px;
+            min-width: 235px;
         }
 
         #iframe {
@@ -53,6 +54,18 @@
                 box-shadow: unset;
             }
         }
+
+        @media screen and (max-width: 768px) {
+            #iframe {
+                height: 120px;
+            }
+            .red-button-with-animate {
+                width: auto;
+            }
+            .container-2 {
+                min-width: 100%;
+            }
+        }
     </style>
 
     <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>
@@ -63,7 +76,7 @@
             <div class="mb-60 color-white film-title" style="font-size: 50px;">{{$filmTitle}}</div>
             <div class="flex w-100 container-1">
                 <div>
-                    <div class="container-2" style="min-width: 235px;">
+                    <div class="container-2" style="">
                         <img src="{{$filmPosterUrl}}" alt="">
                     </div>
                     <div>
