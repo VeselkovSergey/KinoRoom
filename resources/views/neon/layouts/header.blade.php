@@ -48,11 +48,29 @@
         fill: white;
         filter: drop-shadow( 1px 5px 4px #008cff );
     }
+
+    .pr-25-0 {
+        padding-right: 25px;
+    }
+    @media screen and (max-width: 540px) {
+        .pr-25-0 {
+            padding-right: 0;
+        }
+    }
+
+    .ml-50-10 {
+        margin-left: 50px;
+    }
+    @media screen and (max-width: 540px) {
+        .ml-50-10 {
+            margin-left: 10px;
+        }
+    }
 </style>
 
 <header class="w-100 pos-rel z-2 flex" style="height: 70px; background: linear-gradient(210deg, black, transparent);">
     <a href="{{route('home')}}" class="flex-center" style="text-decoration: unset;">
-        <div style="margin-left: 50px;" class="sign_word">
+        <div class="ml-50-10 sign_word">
             NE<span>ON</span>FI<span>L</span>M<span>S</span>
         </div>
     </a>
@@ -61,7 +79,7 @@
 
     <div class="ml-a flex-center mr-10">
 
-        <a class="index-buttons h-75 p-5 pr-25" href="{{route('search')}}" title="наш Telegram">
+        <a class="index-buttons h-75 p-5 pr-25-0" href="{{route('search')}}" title="наш Telegram">
             <svg height="100%" class="neon-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="filter: drop-shadow( 1px 5px 4px #008cff ) " xml:space="preserve">
                 <g>
                     <g>

@@ -6,17 +6,64 @@
         .font-size-20 {
             font-size: 20px;
         }
+
+        .iframe-container {
+            max-height: 100vh;
+            max-width: 100vw;
+            height: 400px;
+            width: 700px;
+            margin: auto;
+        }
+
+        .container-2 {
+            height: 350px
+        }
+
+        #iframe {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .shadow-neon {
+            box-shadow: 0 0 1em #338fee, 0 0 0.5em #b625c5, 0 0 0.1em #300472; padding: 60px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .iframe-container {
+                height: auto;
+                width: auto;
+            }
+
+            .container-1 {
+                flex-direction: column;
+            }
+
+            .container-2 {
+                height: auto;
+            }
+
+            #iframe {
+                width: calc(100vw - 120px);
+                height: 350px;
+                position: relative;
+            }
+
+            .shadow-neon {
+                box-shadow: unset;
+            }
+        }
     </style>
 
     <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>
     <link rel="stylesheet" href="https://player.svetacdn.in/iframe.css">
 
     <div class="flex-center" style="min-height: inherit;">
-        <div class="flex-column-center border-radius-20 w-100" style="box-shadow: 0 0 1em #338fee, 0 0 0.5em #b625c5, 0 0 0.1em #300472; padding: 60px;">
+        <div class="flex-column-center border-radius-20 w-100 shadow-neon">
             <div class="mb-60 color-white film-title" style="font-size: 50px;">{{$filmTitle}}</div>
-            <div class="flex w-100">
+            <div class="flex w-100 container-1">
                 <div>
-                    <div style="height: 350px; min-width: 235px;">
+                    <div class="container-2" style="min-width: 235px;">
                         <img src="{{$filmPosterUrl}}" alt="">
                     </div>
                     <div>
@@ -24,8 +71,8 @@
                     </div>
                 </div>
 
-                <div class="iframe-container" style="max-height: 100vh; max-width: 100vw; height: 400px; width: 700px; margin: auto;">
-                    <div id="iframe" style="position: relative; width: 100%; height: 100%;">
+                <div class="iframe-container">
+                    <div id="iframe">
                         <img src="{{asset('preview.jpg')}}" alt="">
                     </div>
                 </div>
