@@ -152,7 +152,7 @@
         }
         body {
             background-image: url("{{asset('neon/assets/img/bg.png')}}");
-            background-size: contain;
+            background-size: cover;
             background-attachment: fixed;
         }
         input {
