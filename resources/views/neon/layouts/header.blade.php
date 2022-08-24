@@ -68,7 +68,7 @@
     }
 </style>
 
-<header class="w-100 pos-rel z-2 flex" style="height: 70px; background: linear-gradient(210deg, black, transparent);">
+<header class="w-100 pos-rel z-2 flex" style="max-width: 100%; height: 70px; background: linear-gradient(210deg, black, transparent);">
     <a href="{{route('home')}}" class="flex-center" style="text-decoration: unset;">
         <div class="ml-50-10 sign_word">NE<span>O</span><span>N</span>FI<span>L</span>M<span>S</span></div>
     </a>
