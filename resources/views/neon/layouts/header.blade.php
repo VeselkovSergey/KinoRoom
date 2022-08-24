@@ -74,7 +74,7 @@
 
 <header class="w-100 pos-rel z-2 flex" style="max-width: 100%; height: 70px; background: linear-gradient(210deg, black, transparent);">
     <a href="{{route('home')}}" class="flex-center" style="text-decoration: unset;">
-        <div class="pl-50-10 sign_word"><div>NE</div><span><div>O</div></span><span>N</span><div>FI</div><span>L</span><div>M</div><span>S</span></div>
+        <div class="pl-50-10 sign_word"><div><div>N</div>E</div><span><div>O</div></span><span>N</span><div><div>F</div>I</div><span>L</span><div>M</div><span>S</span></div>
     </a>
 
 {{--    @if(auth()->check())--}}
