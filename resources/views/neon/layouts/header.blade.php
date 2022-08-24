@@ -58,24 +58,24 @@
         }
     }
 
-    .ml-50-10 {
-        margin-left: 50px;
+    .pl-50-10 {
+        padding-left: 50px;
     }
     @media screen and (max-width: 540px) {
-        .ml-50-10 {
-            margin-left: 10px;
+        .pl-50-10 {
+            padding-left: 10px;
         }
     }
 </style>
 
 <header class="w-100 pos-rel z-2 flex" style="max-width: 100%; height: 70px; background: linear-gradient(210deg, black, transparent);">
     <a href="{{route('home')}}" class="flex-center" style="text-decoration: unset;">
-        <div class="ml-50-10 sign_word">NE<span>O</span><span>N</span>FI<span>L</span>M<span>S</span></div>
+        <div class="pl-50-10 sign_word">NE<span>O</span><span>N</span>FI<span>L</span>M<span>S</span></div>
     </a>
 
 {{--    @if(auth()->check())--}}
 
-    <div class="ml-a flex-center mr-10">
+    <div class="ml-a flex-center pr-10">
 
         <a class="index-buttons h-75 p-5 pr-25-0" href="{{route('search')}}" title="наш Telegram">
             <svg height="100%" class="neon-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="filter: drop-shadow( 1px 5px 4px #008cff ) " xml:space="preserve">
