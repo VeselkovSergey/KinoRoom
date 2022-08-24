@@ -78,7 +78,7 @@
     <div class="flex-center ml-a">
 
         <a class="index-buttons h-100" href="{{route('search')}}" title="наш Telegram">
-            <svg width="100%" height="100%" class="neon-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="filter: drop-shadow( 1px 5px 4px #008cff ) " xml:space="preserve">
+            <svg width="100%" height="100%" class="neon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="filter: drop-shadow( 1px 5px 4px #008cff ) " xml:space="preserve">
                 <g>
                     <g>
                         <path d="M490.626,153.442c-13.697-31.292-33.236-59.158-58.073-82.819c-3.207-3.055-8.28-2.933-11.335,0.275
