@@ -81,7 +81,7 @@
 
     <div class="flex-center ml-a">
 
-        <a class="index-buttons h-75" href="{{route('search')}}" title="наш Telegram">
+        <a class="index-buttons h-75" href="https://t.me/neonfilmz" title="наш Telegram">
             <svg width="100%" height="100%" class="neon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="filter: drop-shadow( 1px 5px 4px #008cff ); max-width: 70px;">
                 <path d="M490.626,153.442c-13.697-31.292-33.236-59.158-58.073-82.819c-3.207-3.055-8.28-2.933-11.335,0.275
 			c-3.054,3.206-2.931,8.28,0.275,11.333c48.024,45.751,74.473,107.464,74.473,173.769c0,132.318-107.648,239.967-239.967,239.967
