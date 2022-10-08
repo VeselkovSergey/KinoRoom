@@ -25,3 +25,4 @@ Route::get('/git-pull', function (Request $request) {
     echo shell_exec('git pull');
     echo 'git pull complete' . PHP_EOL;
 });
+
