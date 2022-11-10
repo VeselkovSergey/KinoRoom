@@ -114,35 +114,37 @@
     <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>
     <link rel="stylesheet" href="https://player.svetacdn.in/iframe.css">
 
-    <div class="flex-center mb-20 backdrop" style="min-height: inherit;">
-        <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px 0 20px 20px;">
-            <div class="mb-60 color-white film-title" style="font-size: 50px;">{{$filmTitle}}</div>
-            <div class="flex w-100 container-1">
-                <div>
-                    <div class="container-2" style="">
-                        <img src="{{$filmPosterUrl}}" alt="">
+    <div class="flex-center mb-20" style="min-height: inherit;">
+        <div class="backdrop">
+            <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px 0 20px 20px;">
+                <div class="mb-60 color-white film-title" style="font-size: 50px;">{{$filmTitle}}</div>
+                <div class="flex w-100 container-1">
+                    <div>
+                        <div class="container-2" style="">
+                            <img src="{{$filmPosterUrl}}" alt="">
+                        </div>
+                        <div style="display: none;">
+                            <button class="red-button-with-animate" onclick="searchFilm()" style="min-width: 100%;">СМОТРЕТЬ</button>
+                        </div>
                     </div>
-                    <div style="display: none;">
-                        <button class="red-button-with-animate" onclick="searchFilm()" style="min-width: 100%;">СМОТРЕТЬ</button>
-                    </div>
-                </div>
 
-                <div class="iframe-container">
-                    <div id="iframe">
-                        <img class="cp" src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
-                        <div class="bezel" role="status" aria-label="Смотреть">
-                            <div class="bezel-icon">
-                                <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
-                                    <use class="svg-shadow" xlink:href="#id-89"></use>
-                                    <path class="svg-fill" d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z" id="id-89"></path>
-                                </svg>
+                    <div class="iframe-container">
+                        <div id="iframe">
+                            <img class="cp" src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
+                            <div class="bezel" role="status" aria-label="Смотреть">
+                                <div class="bezel-icon">
+                                    <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                                        <use class="svg-shadow" xlink:href="#id-89"></use>
+                                        <path class="svg-fill" d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z" id="id-89"></path>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="film-desc color-white p-10">{{$filmDescription}}</div>
+                <div>
+                    <div class="film-desc color-white p-10">{{$filmDescription}}</div>
+                </div>
             </div>
         </div>
     </div>
