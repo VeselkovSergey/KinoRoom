@@ -66,6 +66,33 @@
                 min-width: 100%;
             }
         }
+
+        .bezel {
+            -webkit-animation: bezel-fadeout .1s linear 1 normal forwards;
+            animation: bezel-fadeout .1s linear 1 normal forwards;
+        }
+
+        .bezel {
+            position: absolute;
+            /*left: calc(50% - 20px);*/
+            left: 50%;
+            top: 50%;
+            /*top: calc(50% - 34.14px);*/
+            width: 52px;
+            height: 52px;
+            z-index: 19;
+            margin-left: -26px;
+            margin-top: -26px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 26px;
+            pointer-events: none;
+        }
+
+        .bezel-icon {
+            width: 40px;
+            height: 40px;
+            margin: 6px;
+        }
     </style>
 
     <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>
@@ -87,6 +114,14 @@
                 <div class="iframe-container">
                     <div id="iframe">
                         <img src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
+                        <div class="bezel" role="status" aria-label="Смотреть">
+                            <div class="bezel-icon">
+                                <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                                    <use class="svg-shadow" xlink:href="#id-89"></use>
+                                    <path class="svg-fill" d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z" id="id-89"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
