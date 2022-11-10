@@ -117,7 +117,7 @@
 
                 <div class="iframe-container">
                     <div id="iframe">
-                        <img src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
+                        <img class="cp" src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
                         <div class="bezel" role="status" aria-label="Смотреть">
                             <div class="bezel-icon">
                                 <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
