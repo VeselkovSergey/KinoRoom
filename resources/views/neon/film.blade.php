@@ -101,6 +101,8 @@
         @if($filmBackDropUrl)
         .backdrop {
             background-image: url("{{$filmBackDropUrl}}");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         @endif
     </style>
@@ -108,7 +110,7 @@
     <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>
     <link rel="stylesheet" href="https://player.svetacdn.in/iframe.css">
 
-    <div class="flex-center mb-20" style="min-height: inherit;">
+    <div class="flex-center mb-20 backdrop" style="min-height: inherit;">
         <div class="flex-column-center w-100 shadow-neon" style="border-radius: 20px 0 20px 20px;">
             <div class="mb-60 color-white film-title" style="font-size: 50px;">{{$filmTitle}}</div>
             <div class="flex w-100 container-1">
