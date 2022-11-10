@@ -80,7 +80,7 @@
             height: 100px;
             margin-left: -50px;
             margin-top: -50px;
-            background: rgba(255 255 255 0.5);
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 100px;
             pointer-events: none;
             cursor: pointer;
