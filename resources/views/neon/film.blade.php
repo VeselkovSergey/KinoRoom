@@ -86,7 +86,7 @@
 
                 <div class="iframe-container">
                     <div id="iframe">
-                        <img src="{{asset('preview.jpg')}}" alt="">
+                        <img src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
                     </div>
                 </div>
             </div>
