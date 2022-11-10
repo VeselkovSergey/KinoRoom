@@ -97,6 +97,12 @@
             position: absolute;
             left: 5px;
         }
+
+        @if($filmBackDropUrl)
+        .backdrop {
+            background-image: url("{{$filmBackDropUrl}}");
+        }
+        @endif
     </style>
 
     <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>

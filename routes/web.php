@@ -154,9 +154,10 @@ Route::get('/', function () {
             $filmDescription = $filmInfo->overview;
 
             $filmPosterUrl = $filmInfo->poster_path !== null ? 'https://image.tmdb.org/t/p/w400' . $filmInfo->poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
+            $filmBackDropUrl = $filmInfo->poster_path !== null ? 'https://image.tmdb.org/t/p/w400' . $filmInfo->backdrop_path : null;
 
 //            if (request('neon')) {
-                return view('neon.film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
+                return view('neon.film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmBackDropUrl', 'filmId', 'isSerial'));
 //            } else {
 //                return view('film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
 //            }
