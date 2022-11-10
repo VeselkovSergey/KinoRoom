@@ -103,6 +103,7 @@
             background-image: url("{{$filmBackDropUrl}}");
             background-repeat: no-repeat;
             background-size: cover;
+            border-radius: 20px;
         }
         .backdrop-shadow {
             background-image: linear-gradient(to right, rgb(6 6 6) 150px, rgb(43 41 41 / 84%) 100%);
