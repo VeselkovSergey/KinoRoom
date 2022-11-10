@@ -16,7 +16,7 @@
         }
 
         .container-2 {
-            height: 350px;
+            height: 400px;
             min-width: 235px;
         }
 
@@ -110,7 +110,7 @@
                     <div class="container-2" style="">
                         <img src="{{$filmPosterUrl}}" alt="">
                     </div>
-                    <div>
+                    <div style="display: none;">
                         <button class="red-button-with-animate" onclick="searchFilm()" style="min-width: 100%;">СМОТРЕТЬ</button>
                     </div>
                 </div>
