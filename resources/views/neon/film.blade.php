@@ -74,24 +74,29 @@
 
         .bezel {
             position: absolute;
-            /*left: calc(50% - 20px);*/
             left: 50%;
             top: 50%;
-            /*top: calc(50% - 34.14px);*/
-            width: 52px;
-            height: 52px;
-            z-index: 19;
-            margin-left: -26px;
-            margin-top: -26px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 26px;
+            width: 100px;
+            height: 100px;
+            margin-left: -50px;
+            margin-top: -50px;
+            background: rgba(255 255 255 0.5);
+            border-radius: 100px;
             pointer-events: none;
+            cursor: pointer;
+            transition: transform 50ms;
+        }
+
+        .bezel:hover {
+            transform: scale(1.1);
         }
 
         .bezel-icon {
-            width: 40px;
-            height: 40px;
-            margin: 6px;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: -8px;
+            left: -5px;
         }
     </style>
 
