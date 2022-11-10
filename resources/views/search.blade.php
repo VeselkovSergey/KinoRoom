@@ -128,7 +128,7 @@
                 });
         }
 
-        const FILM_POSTER_URL = 'https://image.tmdb.org/t/p/w400';
+        const FILM_POSTER_URL = 'https://imagetmdb.com/t/p/w400';
 
         function generateFilmsCards(filmsObjects, container, isSerial = false) {
 
