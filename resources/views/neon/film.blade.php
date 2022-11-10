@@ -27,7 +27,8 @@
         }
 
         .shadow-neon {
-            box-shadow: 0 0 1em #338fee, 0 0 0.5em #b625c5, 0 0 0.1em #300472; padding: 60px;
+            box-shadow: 0 0 1em #338fee, 0 0 0.5em #b625c5, 0 0 0.1em #300472;
+            padding: 30px;
         }
 
         @media screen and (max-width: 768px) {
@@ -117,7 +118,7 @@
     <div class="flex-center mb-20" style="min-height: inherit;">
         <div class="backdrop">
             <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px 0 20px 20px;">
-                <div class="mb-60 color-white film-title" style="font-size: 50px;">{{$filmTitle}}</div>
+                <div class="mb-30 color-white film-title" style="font-size: 40px;">{{$filmTitle}}</div>
                 <div class="flex w-100 container-1">
                     <div>
                         <div class="container-2" style="">
