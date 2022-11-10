@@ -153,7 +153,7 @@ Route::get('/', function () {
             $filmTitle = ($filmInfo->title ?? $filmInfo->name) . ' (' . ($filmInfo->release_date ?? $filmInfo->first_air_date) . ')';
             $filmDescription = $filmInfo->overview;
 
-            $filmPosterUrl = $filmInfo->poster_path !== null ? 'https://imagetmdb.cub.watch/t/p/w200' . $filmInfo->poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
+            $filmPosterUrl = $filmInfo->poster_path !== null ? 'https://image.tmdb.org/t/p/w200' . $filmInfo->poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
 
 //            if (request('neon')) {
                 return view('neon.film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
