@@ -178,8 +178,8 @@
     /*}*/
 
     .index-buttons:hover {
-        transform: scale(1.05);
-        transition: transform 250ms;
+        /*transform: scale(1.05);*/
+        /*transition: transform 250ms;*/
     }
 
     .title-helper {
