@@ -232,7 +232,7 @@
         }
         return element;
     }
-
+/*
     document.body.querySelectorAll('.index-buttons').forEach((element) => {
         element.addEventListener('mouseenter', () => {
             if (element.getAttribute('title') && !element.dataset.titleShow || element.dataset.titleShow === 'false') {
@@ -271,4 +271,5 @@
     const uid = function () {
         return Date.now().toString(36) + Math.random().toString(36).substr(2);
     }
+ */
 </script>
