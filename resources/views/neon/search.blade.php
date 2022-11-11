@@ -47,7 +47,7 @@
     <div class="flex-column-center" style="min-height: inherit;">
 
         <div class="flex-center w-100 py-20 pos-sticky top-0 z-1">
-            <div class="w-80 pos-rel">
+            <div class="w-80 pos-rel mr-10">
                 <input style="padding: 16px;" type="text" placeholder="Введите название(сериал , фильм , мультфильм)" class="text-center search-field">
                 <span class="pos-abs cp" style="right: 10px; top: 35%;" onclick="clearSearchField()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
