@@ -30,6 +30,7 @@
         .film-desc-container {
             max-width: 200px;
             margin: auto;
+            padding-bottom: 10px;
         }
         .favorite-button {
             position: absolute;
