@@ -201,6 +201,8 @@
                     filmContainer2.append(titleContainer);
                 });
         }
+
+        searchField.focus()
     </script>
 
 @endsection
