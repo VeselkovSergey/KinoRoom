@@ -28,6 +28,10 @@
             padding: 30px;
         }
 
+        .film-title {
+            font-size: 40px;
+        }
+
         @media screen and (max-width: 768px) {
             .iframe-container {
                 height: auto;
@@ -62,6 +66,10 @@
             }
             .container-2 {
                 min-width: 100%;
+            }
+
+            .film-title {
+                font-size: 20px;
             }
         }
 
@@ -115,7 +123,7 @@
     <div class="flex-center mb-20" style="min-height: inherit;">
         <div class="backdrop">
             <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px;">
-                <div class="mb-30 color-white film-title" style="font-size: 40px;">{{$filmTitle}}</div>
+                <div class="mb-30 color-white film-title">{{$filmTitle}}</div>
                 <div class="flex w-100 container-1">
                     <div>
                         <div class="container-2" style="">
