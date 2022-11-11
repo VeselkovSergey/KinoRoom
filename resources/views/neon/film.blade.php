@@ -3,9 +3,6 @@
 @section('content')
 
     <style>
-        .font-size-20 {
-            font-size: 20px;
-        }
 
         .iframe-container {
             max-height: 100vh;
@@ -107,7 +104,7 @@
             border-radius: 20px;
         }
         .backdrop-shadow {
-            background-image: linear-gradient(to right, rgb(6 6 6) 150px, rgb(43 41 41 / 84%) 100%);
+            background-image: linear-gradient(to right, rgb(6 6 6) 150px, rgba(43, 41, 41, 0.8) 100%);
         }
         @endif
     </style>
@@ -117,7 +114,7 @@
 
     <div class="flex-center mb-20" style="min-height: inherit;">
         <div class="backdrop">
-            <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px 0 20px 20px;">
+            <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px;">
                 <div class="mb-30 color-white film-title" style="font-size: 40px;">{{$filmTitle}}</div>
                 <div class="flex w-100 container-1">
                     <div>
@@ -134,7 +131,7 @@
                             <img class="cp" src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
                             <div class="bezel" role="status" aria-label="Смотреть">
                                 <div class="bezel-icon">
-                                    <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                                    <svg height="100%" viewBox="0 0 36 36" width="100%">
                                         <use class="svg-shadow" xlink:href="#id-89"></use>
                                         <path class="svg-fill" d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z" id="id-89"></path>
                                     </svg>
