@@ -108,7 +108,7 @@
         }
 
         function startSearch(query) {
-            if (query.length > 2) {
+            if (query && query.length > 2) {
                 history.pushState({}, '', '?query=' + query)
                 // document.body.querySelector('.find-films-main-container').classList.toggle('hide');
                 findFilmsContainer.innerHTML = '';
