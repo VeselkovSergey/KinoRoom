@@ -95,7 +95,6 @@
 
         document.body.querySelector('.search-film-button').addEventListener('click', () => {
             startSearch(searchField.value);
-
         });
 
         searchField.addEventListener('keypress', (event) => {
@@ -110,6 +109,7 @@
 
         function startSearch(query) {
             if (query.length > 2) {
+                history.pushState({}, '', '?query=' + query)
                 // document.body.querySelector('.find-films-main-container').classList.toggle('hide');
                 findFilmsContainer.innerHTML = '';
                 searchFilms(query);
@@ -203,6 +203,12 @@
         }
 
         searchField.focus()
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        params.query ? searchField.value = params.query : ''
+        startSearch(params.query)
+
     </script>
 
 @endsection
