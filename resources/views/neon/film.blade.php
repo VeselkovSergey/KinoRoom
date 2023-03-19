@@ -209,11 +209,11 @@
 
                             document.getElementById('iframe').innerHTML = math1[1];
 
-                            document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());
-                            let myScript = document.createElement('script');
-                            myScript.src = '{{asset('assets/js/videocdn.js')}}' + '?v=' + Date.now()
-                            myScript.id = 'videocdn_js'
-                            document.body.append(myScript);
+                            {{--document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());--}}
+                            {{--let myScript = document.createElement('script');--}}
+                            {{--myScript.src = '{{asset('assets/js/videocdn.js')}}' + '?v=' + Date.now()--}}
+                            {{--myScript.id = 'videocdn_js'--}}
+                            {{--document.body.append(myScript);--}}
 
                             // iframeContainer.classList.remove('hide');
                         });
