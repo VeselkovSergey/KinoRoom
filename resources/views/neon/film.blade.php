@@ -117,8 +117,11 @@
         @endif
     </style>
 
-    <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>
-    <link rel="stylesheet" href="https://player.svetacdn.in/iframe.css">
+{{--    <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>--}}
+{{--    <link rel="stylesheet" href="https://player.svetacdn.in/iframe.css">--}}
+
+    <script src="https://52.svetacdn.in/Assets/pj.js?v=1111"></script>
+    <link rel="stylesheet" href="https://52.svetacdn.in/Assets/iframe.css">
 
     <div class="flex-center mb-20" style="min-height: inherit;">
         <div class="backdrop">
