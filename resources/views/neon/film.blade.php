@@ -196,6 +196,8 @@
 
             const iframeSrc = data.iframe_src;
 
+            console.log(iframeSrc)
+
             fetch('https:'+iframeSrc+'?api_token=' + VIDEO_CDN_API_TOKEN)
                 .then((response) => {
                     response.text()
