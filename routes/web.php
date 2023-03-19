@@ -27,10 +27,6 @@ Route::any('/git-pull', function () {
     echo '</pre>';
 })->name('git-pull');
 
-Route::get('/get-request', function () {
-    dd(request());
-});
-
 Route::group(['middleware' => 'analytics'], function () {
 
     Route::get('/get-analytics', function () {

@@ -16,8 +16,16 @@ class Analytics
      */
     public function handle(Request $request, Closure $next)
     {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
         \App\Models\Analytics::create([
-            "client_ip_address" => request()->server('REMOTE_ADDR'),
+            "client_ip_address" => $ip,
             "data" => request()->fullUrl(),
         ]);
         return $next($request);
