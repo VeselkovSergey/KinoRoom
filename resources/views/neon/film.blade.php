@@ -209,7 +209,7 @@
 
                             document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());
                             let myScript = document.createElement('script');
-                            myScript.src = '{{asset('assets/js/videocdn.js?v=' + ((new Date()).now()))}}'
+                            myScript.src = '{{asset('assets/js/videocdn.js')}}' + '?v=' + Date.now()
                             myScript.id = 'videocdn_js'
                             document.body.append(myScript);
 
