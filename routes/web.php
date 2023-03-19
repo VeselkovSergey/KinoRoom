@@ -29,7 +29,11 @@ Route::any('/git-pull', function () {
 
 Route::get('/get-analytics', function () {
     return view("analytics", ["analytics" => \App\Models\Analytics::all()]);
-});
+})->name("analytics");
+
+Route::get('/analytics-detail/{id}', function () {
+    return view("analytics-detail", ["analytics" => \App\Models\Analytics::find(request()->id)]);
+})->name("analytics-detail");
 
 
 Route::get('/', function () {

@@ -10,7 +10,7 @@
     <tbody>
     @foreach($analytics as $item)
         <tr>
-            <td>{{$item->id}}</td>
+            <td><a href="{{route("analytics-detail", $item->id)}}">{{$item->id}}</a></td>
             <td>{{$item->client_ip_address}}</td>
             <td>{{$item->data}}</td>
             <td>{{$item->created_at}}</td>
