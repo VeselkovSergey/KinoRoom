@@ -235,7 +235,10 @@
                             let count = 1
                             document.getElementById('iframe').querySelectorAll('script').forEach((element) => {
                                 console.log(element)
-                                if (!element.src.includes('pj.js')) {
+                                if (
+                                    !element.src.includes('pj.js')
+                                    && !element.src.includes('fb.js')
+                                ) {
                                     setTimeout(() => {
                                         let myScript = document.createElement('script');
                                         myScript.src = element.src
