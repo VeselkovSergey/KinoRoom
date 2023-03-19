@@ -120,8 +120,8 @@
 {{--    <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>--}}
 {{--    <link rel="stylesheet" href="https://player.svetacdn.in/iframe.css">--}}
 
-    <script src="https://52.svetacdn.in/Assets/pj.js?v=1111"></script>
-    <link rel="stylesheet" href="https://52.svetacdn.in/Assets/iframe.css">
+{{--    <script src="https://52.svetacdn.in/Assets/pj.js?v=1111"></script>--}}
+{{--    <link rel="stylesheet" href="https://52.svetacdn.in/Assets/iframe.css">--}}
 
     <div class="flex-center mb-20" style="min-height: inherit;">
         <div class="backdrop">
@@ -207,7 +207,8 @@
                             let newIframe = raw.replace(/\n/g, '').replace('/iframe.js', '{{asset('assets/js/videocdn.js')}}');
                             let math1 = newIframe.match(/<body[^>]+>(.*)<\/body>/);
 
-                            document.getElementById('iframe').innerHTML = math1[1];
+                            // document.getElementById('iframe').innerHTML = math1[1];
+                            document.getElementById('iframe').innerHTML = iframeSrc;
 
                             {{--document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());--}}
                             {{--let myScript = document.createElement('script');--}}
