@@ -63,7 +63,7 @@
             , v = document.getElementById("client_id").value
             , m = document.getElementById("cuid").value
             , y = document.getElementById("hide_title").value
-            , x = document.getElementById("midroll").value
+            , x = document.getElementById("midroll")?.value ?? ""
             , b = document.getElementById("pauseroll").value
             , w = document.getElementById("userPoster").value
             , C = document.getElementById("player");
