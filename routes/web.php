@@ -30,7 +30,7 @@ Route::any('/git-pull', function () {
 Route::group(['middleware' => 'analytics'], function () {
 
     Route::get('/get-analytics', function () {
-        dd(\App\Models\Analytics::all());
+        return view("analytics", ["analytics" => \App\Models\Analytics::all()]);
     });
 
 
