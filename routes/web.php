@@ -27,6 +27,9 @@ Route::any('/git-pull', function () {
     echo '</pre>';
 })->name('git-pull');
 
+Route::group(['middleware' => 'analytics'], function () {
+
+
 Route::get('/', function () {
 //    if (\Illuminate\Support\Facades\Auth::check()) {
         return redirect(\route('search'));
@@ -173,4 +176,4 @@ Route::get('/abort', function () {
     abort(404);
 })->name('abort');
 
-
+});
