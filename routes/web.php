@@ -27,8 +27,6 @@ Route::any('/git-pull', function () {
     echo '</pre>';
 })->name('git-pull');
 
-Route::group(['middleware' => 'analytics'], function () {
-
     Route::get('/get-analytics', function () {
         return view("analytics", ["analytics" => \App\Models\Analytics::all()]);
     });
@@ -179,5 +177,3 @@ Route::get('/', function () {
 Route::get('/abort', function () {
     abort(404);
 })->name('abort');
-
-});
