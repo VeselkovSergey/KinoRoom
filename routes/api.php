@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,12 @@ Route::any('/git-pull', function (Request $request) {
     echo '<pre>' . PHP_EOL;
     echo 'git pull start' . PHP_EOL;
     echo shell_exec('git pull');
+    echo shell_exec('git pull');
     echo 'git pull complete' . PHP_EOL;
+
+    echo 'php artisan migrate start' . PHP_EOL;
+    Artisan::call('migrate');
+    echo 'php artisan migrate complete' . PHP_EOL;
+
     echo '</pre>' . PHP_EOL;
 });
