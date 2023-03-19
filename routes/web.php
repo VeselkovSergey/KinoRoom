@@ -29,6 +29,10 @@ Route::any('/git-pull', function () {
 
 Route::group(['middleware' => 'analytics'], function () {
 
+    Route::get('/get-analytics', function () {
+        dd(\App\Models\Analytics::all());
+    });
+
 
 Route::get('/', function () {
 //    if (\Illuminate\Support\Facades\Auth::check()) {
