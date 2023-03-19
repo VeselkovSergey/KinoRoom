@@ -64,9 +64,9 @@
             , m = document.getElementById("cuid").value
             , y = document.getElementById("hide_title").value
             , x = document.getElementById("midroll")?.value ?? ""
-            , b = document.getElementById("pauseroll").value
-            , w = document.getElementById("userPoster").value
-            , C = document.getElementById("player");
+            , b = document.getElementById("pauseroll")?.value ?? ""
+            , w = document.getElementById("userPoster")?.value ?? ""
+            , C = document.getElementById("player")?.value ?? "";
         function T(e) {
             var t = window.location != window.parent.location ? document.referrer : document.location.href;
             if (t.includes("select=1")) {
