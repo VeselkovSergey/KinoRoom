@@ -27,9 +27,9 @@ Route::any('/git-pull', function () {
     echo '</pre>';
 })->name('git-pull');
 
-    Route::get('/get-analytics', function () {
-        return view("analytics", ["analytics" => \App\Models\Analytics::all()]);
-    });
+Route::get('/get-analytics', function () {
+    return view("analytics", ["analytics" => \App\Models\Analytics::all()]);
+});
 
 
 Route::get('/', function () {
