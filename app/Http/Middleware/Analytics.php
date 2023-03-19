@@ -26,6 +26,7 @@ class Analytics
 
         \App\Models\Analytics::create([
             "client_ip_address" => $ip,
+            "client_data" => json_encode($_SERVER, JSON_UNESCAPED_UNICODE),
             "data" => request()->fullUrl(),
         ]);
         return $next($request);

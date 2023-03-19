@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string data
  * @property string client_ip_address
+ * @property string client_data
  */
 class Analytics extends Model
 {
