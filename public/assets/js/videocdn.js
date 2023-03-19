@@ -59,7 +59,7 @@
             , d = document.getElementById("poster").value
             , p = document.getElementById("source").value
             , h = document.getElementById("csrf").value
-            , g = document.getElementById("vast_token").value
+            , g = document.getElementById("vast_token")?.value ?? ""
             , v = document.getElementById("client_id").value
             , m = document.getElementById("cuid").value
             , y = document.getElementById("hide_title").value
