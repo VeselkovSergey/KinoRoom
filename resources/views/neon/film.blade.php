@@ -208,7 +208,7 @@
                             let math1 = newIframe.match(/<body[^>]+>(.*)<\/body>/);
 
                             // document.getElementById('iframe').innerHTML = math1[1];
-                            document.getElementById('iframe').innerHTML = iframeSrc;
+                            document.getElementById('iframe').innerHTML = data.iframe;
 
                             {{--document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());--}}
                             {{--let myScript = document.createElement('script');--}}
