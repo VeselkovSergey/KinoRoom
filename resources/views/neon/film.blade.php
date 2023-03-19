@@ -204,17 +204,54 @@
                         .then((raw) => {
 
 
-                            let newIframe = raw.replace(/\n/g, '').replace('/iframe.js', '{{asset('assets/js/videocdn.js')}}');
-                            let math1 = newIframe.match(/<body[^>]+>(.*)<\/body>/);
+                            const domain = data.iframe_src.split("/")
 
-                            // document.getElementById('iframe').innerHTML = math1[1];
-                            document.getElementById('iframe').innerHTML = data.iframe;
+                            if (!domain[2]) {
+                                alert('Что то сломалось')
+                            }
+
+                            {{--let newIframe = raw.replace(/\n/g, '').replace('rek_array', '{{asset('assets/js/videocdn.js')}}');--}}
+                            let newIframe = raw.replace(/\n/g, '')
+                                .replaceAll('"/Assets', '"//' + domain[2] + '/Assets')
+                                // .replaceAll('head', 'div')
+                                // .replaceAll('body', 'div')
+
+                            // console.log(newIframe)
+
+                            // let math1 = newIframe.match(/<html[^>]+>(.*)<\/html>/);
+                            let math1 = newIframe.match(/<html>(.*)<\/html>/);
+
+                            // console.log(math1)
+
+                            document.getElementById('iframe').innerHTML = math1[1];
+                            // document.getElementById('iframe').innerHTML = data.iframe;
+
+                            document.getElementById('iframe').querySelector("#rek_array").value = ""
+                            document.getElementById('iframe').querySelector("#host").value = ""
+                            document.getElementById('iframe').querySelector("#client_id").value = ""
+                            document.getElementById('iframe').querySelector("#autoplay").value = "1"
+                            document.getElementById('iframe').querySelector("#downloadBtn").value = "0"
+
+                            let count = 1
+                            document.getElementById('iframe').querySelectorAll('script').forEach((element) => {
+                                console.log(element)
+                                if (!element.src.includes('pj.js')) {
+                                    setTimeout(() => {
+                                        let myScript = document.createElement('script');
+                                        myScript.src = element.src
+                                        document.body.append(myScript);
+                                    }, 1 * 1000 * count++)
+                                }
+                            })
+
+                            setTimeout(() => {
+                                let myScript = document.createElement('script');
+                                myScript.src = '{{asset('assets/js/pj.js')}}' + '?v=' + Date.now()
+                                document.body.append(myScript);
+                            }, 1 * 1000 * count++)
 
                             {{--document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());--}}
-                            {{--let myScript = document.createElement('script');--}}
-                            {{--myScript.src = '{{asset('assets/js/videocdn.js')}}' + '?v=' + Date.now()--}}
-                            {{--myScript.id = 'videocdn_js'--}}
-                            {{--document.body.append(myScript);--}}
+
 
                             // iframeContainer.classList.remove('hide');
                         });
