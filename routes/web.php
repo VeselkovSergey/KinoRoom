@@ -181,3 +181,14 @@ Route::get('/', function () {
 Route::get('/abort', function () {
     abort(404);
 })->name('abort');
+
+Route::get('/change', function () {
+
+    $path = app()->environmentFilePath();
+
+    file_put_contents($path, preg_replace(
+        "/^APP_DEBUG=true/m",
+        "APP_DEBUG=false",
+        file_get_contents($path)
+    ));
+});
