@@ -95,8 +95,15 @@ const iframeElement = document.body.querySelector("#iframe")
 
                 poster: d,
                 autoplay: f,
-                log: 1,
-                logout: 1
+                log: 0,
+                logout: 1,
+                control_YRkHB: 0,
+                control_474jR: 0,
+                chromecast: 0,
+                control_FUyzf: 0,
+                control_mute: 0,
+                control_settings: 0,
+                control_share: 0,
             });
             if ("tv_series" === a) {
                 var i = document.getElementById("season").value,

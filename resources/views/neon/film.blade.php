@@ -197,8 +197,6 @@
 
             const iframeSrc = data.iframe_src;
 
-            console.log(iframeSrc)
-
             fetch('https:'+iframeSrc+'?api_token=' + VIDEO_CDN_API_TOKEN)
                 .then((response) => {
                     response.text()
@@ -235,7 +233,6 @@
 
                             let count = 1
                             document.getElementById('iframe').querySelectorAll('script').forEach((element) => {
-                                console.log(element)
                                 if (
                                     !element.src.includes('pj.js')
                                     && !element.src.includes('fb.js')
