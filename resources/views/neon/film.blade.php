@@ -54,6 +54,7 @@
 
             .shadow-neon {
                 box-shadow: unset;
+                padding: 5px;
             }
         }
 
