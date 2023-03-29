@@ -47,8 +47,8 @@
             }
 
             #iframe {
-                width: calc(100vw - 120px);
-                height: 350px;
+                width: calc(100vw);
+                /*height: 350px;*/
                 position: relative;
             }
 
