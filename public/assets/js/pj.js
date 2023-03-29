@@ -83,7 +83,7 @@ const iframeElement = document.body.querySelector("#iframe")
                 file: s[e || 0],
                 download: z[e || 0],
                 traslation_id: e,
-                default_quality: p ? p + "p" : "360p",
+                default_quality: p ? p + "p" : "1080p",
 
                 host: HOST,
                 userIp: USERIP,
