@@ -198,6 +198,8 @@
 
             const iframeSrc = data.iframe_src;
 
+            LoaderShow(document.getElementById('iframe'))
+
             fetch('https:'+iframeSrc+'?api_token=' + VIDEO_CDN_API_TOKEN)
                 .then((response) => {
                     response.text()
@@ -225,6 +227,7 @@
 
                             document.getElementById('iframe').innerHTML = math1[1];
                             // document.getElementById('iframe').innerHTML = data.iframe;
+                            LoaderShow(document.getElementById('iframe'))
 
                             document.getElementById('iframe').querySelector("#rek_array").value = ""
                             document.getElementById('iframe').querySelector("#host").value = ""
@@ -250,6 +253,10 @@
                                 let myScript = document.createElement('script');
                                 myScript.src = '{{asset('assets/js/pj.js')}}' + '?v=' + Date.now()
                                 document.body.append(myScript);
+                            }, 1 * 1000 * count++)
+
+                            setTimeout(() => {
+                                LoaderHide()
                             }, 1 * 1000 * count++)
 
                             {{--document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());--}}
