@@ -150,7 +150,7 @@
                 });
         }
 
-        const FILM_POSTER_URL = 'https://imagetmdb.com/t/p/w400';
+        const FILM_POSTER_URL = 'https://imagetmdb.com/t/p/w500';
 
         function generateFilmsCards(filmsObjects, container, isSerial = false) {
 
