@@ -111,6 +111,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             border-radius: 20px;
+            width: 100%;
         }
         .backdrop-shadow {
             background-image: linear-gradient(to right, rgb(6 6 6) 150px, rgba(43, 41, 41, 0.8) 100%);
