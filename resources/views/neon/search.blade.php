@@ -23,8 +23,14 @@
 
         .film-img-container {
             height: 350px;
-            max-width: 230px;
+            /*max-width: 230px;*/
             min-width: 230px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .film-img-container {
+                height: unset;
+            }
         }
 
         .film-desc-container {
