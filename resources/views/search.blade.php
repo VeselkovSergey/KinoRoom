@@ -85,6 +85,7 @@
 
         searchField.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
+                searchField.blur()
                 startSearch(event.target.value);
             }
         });
