@@ -162,16 +162,35 @@
 
     <script>
 
+        function putWatched() {
+            const filmObject = {
+                id: "{{$filmInfo->id}}",
+                title: "{{$filmInfo->title ?? $filmInfo->name}}",
+                poster_path: "{{$filmInfo->poster_path}}",
+                release_date: "{{$filmInfo->release_date ?? $filmInfo->first_air_date}}",
+                isSerial: "{{$isSerial}}",
+            }
+
+            let watched = localStorage.getItem("watched") ? JSON.parse(localStorage.getItem("watched")) : []
+
+            const findIndex = watched.findIndex((film) => {
+                console.log(film, filmObject)
+                return film.id === filmObject.id && film.isSerial === filmObject.isSerial
+            })
+
+            if (findIndex !== -1) {
+                watched.splice(findIndex, 1)
+            }
+
+            watched.unshift(filmObject)
+
+            localStorage.setItem("watched", JSON.stringify(watched))
+        }
+
         const iframeContainer = document.body.querySelector('.iframe-container');
 
         function searchFilm() {
-            fetch('https://apitmdb.cub.watch/3/'+"{{($isSerial === 'true' ? 'tv' : 'movie')}}"+'/'+"{{$filmId}}"+'/external_ids?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru')
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    getFilmFiles(data.imdb_id, {{$isSerial}}, "{{$filmTitle}}");
-                });
+            getFilmFiles("{{$filmImdbId}}", {{$isSerial}}, "{{$filmTitle}}");
         }
 
         const VIDEO_CDN_API_TOKEN = '3i40G5TSECmLF77oAqnEgbx61ZWaOYaE';
@@ -260,6 +279,7 @@
 
                             setTimeout(() => {
                                 LoaderHide()
+                                putWatched()
                             }, 1 * 1000 * count++)
 
                             {{--document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());--}}

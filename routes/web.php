@@ -146,18 +146,26 @@ Route::get('/', function () {
 
         Route::get('/film', function () {
 
+            $apiKey = "4ef0d7355d9ffb5151e987764708ce96";
+
             $filmId = request('id');
             $isSerial = request('isSerial');
 
-            $url = 'https://apitmdb.cub.watch/3/' . ($isSerial === 'true' ? 'tv' : 'movie') . '/' . $filmId . '?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru';
+            $url = 'https://apitmdb.cub.watch/3/' . ($isSerial === 'true' ? 'tv' : 'movie') . '/' . $filmId . '?api_key='.$apiKey.'&language=ru';
+            $urlForId = 'https://apitmdb.cub.watch/3/'.($isSerial === 'true' ? 'tv' : 'movie').'/'.$filmId.'/external_ids?api_key='.$apiKey.'&language=ru';
 
             try {
                 $filmInfoRaw = file_get_contents($url);
+                $filmIdsRaw = file_get_contents($urlForId);
             } catch (Exception $e) {
                 return abort(404);
             }
 
             $filmInfo = json_decode($filmInfoRaw);
+            $filmInfoIds = json_decode($filmIdsRaw);
+
+            $filmId = $filmInfo->id;
+            $filmImdbId = $filmInfoIds->imdb_id;
 
             $filmTitle = ($filmInfo->title ?? $filmInfo->name) . ' (' . ($filmInfo->release_date ?? $filmInfo->first_air_date) . ')';
             $filmDescription = $filmInfo->overview;
@@ -166,7 +174,7 @@ Route::get('/', function () {
             $filmBackDropUrl = $filmInfo->backdrop_path !== null ? 'https://imagetmdb.com/t/p/w1920_and_h800_multi_faces' . $filmInfo->backdrop_path : null;
 
 //            if (request('neon')) {
-                return view('neon.film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmBackDropUrl', 'filmId', 'isSerial'));
+                return view('neon.film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmBackDropUrl', 'filmId', 'isSerial', 'filmImdbId', 'filmInfo'));
 //            } else {
 //                return view('film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
 //            }

@@ -14,6 +14,11 @@
             transform: scale(1.01);
         }
 
+        .film-container {
+            text-decoration: none;
+            color: unset;
+        }
+
         .film-container2 {
             box-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #338fee, 0 0 0.5em #b625c5, 0 0 0.1em #300472;
             border-radius: 10px;
@@ -53,7 +58,7 @@
 
     <div class="flex-column-center" style="min-height: inherit;">
 
-        <div class="flex-center w-100 py-20 pos-sticky top-0 z-1">
+        <div class="flex-center w-100 py-20 pos-sticky top-0 z-2">
             <div class="w-80 pos-rel mr-10">
                 <input style="padding: 10px; font-size: 24px" type="text" placeholder="Введите название сериала/фильма/мультфильма" class="text-center search-field">
                 <span class="pos-abs cp" style="right: 10px;top: 22%;background-color: white;padding: 5px;" onclick="clearSearchField()">
@@ -152,7 +157,7 @@
 
         const FILM_POSTER_URL = 'https://imagetmdb.com/t/p/w500';
 
-        function generateFilmsCards(filmsObjects, container, isSerial = false) {
+        function generateFilmsCards(filmsObjects, container, isSerial = false, withSort = true) {
 
             // if (Object.keys(filmsObjects).length > 0) {
             //     const titleCategory = document.createElement('h3');
@@ -162,22 +167,30 @@
             //     container.append(titleCategory);
             // }
 
-            filmsObjects
-                .sort((prev, next) => {
+            let result = filmsObjects
+
+
+            if (withSort) {
+                result.sort((prev, next) => {
                     let prevDate = prev.release_date ?? prev.first_air_date;
                     let nextDate = next.release_date ?? next.first_air_date;
 
                     return Date.parse(nextDate) - Date.parse(prevDate);
                 })
-                .forEach((filmObject) => {
+            }
+
+            result.forEach((filmObject) => {
                     const id = filmObject.id;
                     const title = filmObject.title ?? filmObject.name;
                     const description = filmObject.overview;
                     const poster = filmObject.poster_path !== null ? FILM_POSTER_URL + filmObject.poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
                     const releaseDate = filmObject.release_date ?? filmObject.first_air_date;
 
-                    const filmContainer = document.createElement('div');
-                    filmContainer.addEventListener('click', () => location.href = "{{route('film')}}" + '?id=' + id + '&isSerial=' + isSerial)
+                    const checkedIsSerial = filmObject.isSerial !== undefined ? filmObject.isSerial : isSerial
+
+                    const filmContainer = document.createElement('a');
+                    filmContainer.href = "{{route('film')}}" + '?id=' + id + '&isSerial=' + checkedIsSerial
+                    {{--filmContainer.addEventListener('click', () => location.href = "{{route('film')}}" + '?id=' + id + '&isSerial=' + isSerial)--}}
                     filmContainer.className = 'flex cp film-container';
                     container.append(filmContainer);
 
@@ -215,6 +228,19 @@
         });
         params.query ? searchField.value = params.query : ''
         startSearch(params.query)
+
+        if (!params.query) {
+            let watched = localStorage.getItem("watched") ? JSON.parse(localStorage.getItem("watched")) : []
+            if (watched.length > 0) {
+                const titleContainer = document.createElement('h2');
+                titleContainer.className = 'color-white text-center mb-15';
+                titleContainer.style.flex = "1 1 100%"
+                titleContainer.style.zIndex = "1"
+                titleContainer.innerHTML = 'Вы смотрели';
+                findFilmsContainer.append(titleContainer);
+                generateFilmsCards(watched, findFilmsContainer, null, false)
+            }
+        }
 
     </script>
 
