@@ -260,7 +260,7 @@
                                 if (
                                     !element.src.includes('pj.js')
                                     && !element.src.includes('fb.js')
-                                    && !element.src.includes('p2p-media-loader')
+                                    // && !element.src.includes('p2p-media-loader')
                                     && !element.src.includes('email-decode.min.js')
                                 ) {
                                     setTimeout(() => {
