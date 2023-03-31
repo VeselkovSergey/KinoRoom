@@ -250,7 +250,7 @@
                             LoaderShow(document.getElementById('iframe'))
 
                             document.getElementById('iframe').querySelector("#rek_array").value = ""
-                            document.getElementById('iframe').querySelector("#host").value = ""
+                            document.getElementById('iframe').querySelector("#host").value = "svetacdn.in"
                             document.getElementById('iframe').querySelector("#client_id").value = ""
                             // document.getElementById('iframe').querySelector("#autoplay").value = "1"
                             document.getElementById('iframe').querySelector("#downloadBtn").value = "0"
