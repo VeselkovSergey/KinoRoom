@@ -41,6 +41,10 @@
             height: 100%;
         }
 
+        video {
+            width: 100%;
+        }
+
         main {
             min-height: calc(100vh - 126px);
             max-width: 1440px;
