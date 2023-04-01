@@ -156,7 +156,22 @@
             opacity: 0;
         }
 
-        .seasons, .series, .translations {
+        #iframe:hover .quality {
+            opacity: 1;
+        }
+
+        .quality {
+            position: absolute;
+            top: 35px;
+            left: 10px;
+            opacity: 0;
+        }
+
+        #iframe.isSerial .quality {
+            top: 85px;
+        }
+
+        .seasons, .series, .translations, .quality {
             max-width: calc(100% - 20px);
         }
     </style>
@@ -183,10 +198,10 @@
 
                     <div class="iframe-container">
                         <div id="iframe">
-{{--                            <div class="videoContainer flex-center">--}}
+                            <div class="videoContainer flex-center">
 
-{{--                            </div>--}}
-{{--                            <div class="preview-poster flex-center">--}}
+                            </div>
+                            <div class="preview-poster flex-center">
                                 <img class="cp" src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
                                 <div class="bezel" role="status" aria-label="Смотреть">
                                     <div class="bezel-icon">
@@ -196,7 +211,7 @@
                                         </svg>
                                     </div>
                                 </div>
-{{--                            </div>--}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,12 +222,12 @@
         </div>
     </div>
 
-{{--    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>--}}
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <script>
         // const link = "//cloud.cdnland.in/797b1976a2317ccc03e2506170aaddc3:2023040115/movies/df8229e4592978f160c2ad69a5139cd86ab745ce/1080.mp4:hls:manifest.m3u8"
 
-        function setVideo(link, container) {
+        function setVideo(link, container, startTime = 0) {
 
             container.innerHTML = ""
 
@@ -227,44 +242,69 @@
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
                     videoElement.play();
+                    videoElement.currentTime = Number(startTime)
                 });
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
                     videoElement.play();
+                    videoElement.currentTime = Number(startTime)
                 });
             }
         }
 
-        //setVideo(link, document.getElementById("videoContainer"))
     </script>
 
 
     <script>
 
-        function putWatched() {
-            const filmObject = {
-                id: "{{$filmInfo->id}}",
-                title: "{{$filmInfo->title ?? $filmInfo->name}}",
-                poster_path: "{{$filmInfo->poster_path}}",
-                release_date: "{{$filmInfo->release_date ?? $filmInfo->first_air_date}}",
-                isSerial: "{{$isSerial}}",
+        let filmObject = {
+            id: "{{$filmInfo->id}}",
+            title: "{{$filmInfo->title ?? $filmInfo->name}}",
+            poster_path: "{{$filmInfo->poster_path}}",
+            release_date: "{{$filmInfo->release_date ?? $filmInfo->first_air_date}}",
+            isSerial: "{{$isSerial}}",
+            was: {
+                translate: 0,
+                season: 0,
+                series: 0,
+                quality: 0,
+                time: 0,
             }
+        }
+
+        function putWatched() {
 
             let watched = localStorage.getItem("watched") ? JSON.parse(localStorage.getItem("watched")) : []
 
             const findIndex = watched.findIndex((film) => {
-                console.log(film, filmObject)
                 return film.id === filmObject.id && film.isSerial === filmObject.isSerial
             })
 
             if (findIndex !== -1) {
+                filmObject.was = watched[findIndex].was
                 watched.splice(findIndex, 1)
             }
 
             watched.unshift(filmObject)
 
             localStorage.setItem("watched", JSON.stringify(watched))
+        }
+
+        const updateWatchedTime = ({translate, season, series, quality, time}) => {
+            let watched = localStorage.getItem("watched") ? JSON.parse(localStorage.getItem("watched")) : []
+            const findIndex = watched.findIndex((film) => {
+                return film.id === filmObject.id && film.isSerial === filmObject.isSerial
+            })
+            watched[findIndex].was = {
+                translate: translate ?? watched[findIndex].was.translate,
+                season: season ?? watched[findIndex].was.season,
+                series: series ?? watched[findIndex].was.series,
+                quality: quality ?? watched[findIndex].was.quality,
+                time: time ?? watched[findIndex].was.time,
+            }
+            localStorage.setItem("watched", JSON.stringify(watched))
+            filmObject.was = watched[findIndex].was
         }
 
         const iframeContainer = document.body.querySelector('.iframe-container');
@@ -294,183 +334,25 @@
                 });
         }
 
+        const useNewMethod = false
+
         function parseVideoFiles(data) {
 
             const iframeSrc = data.iframe_src;
 
-            // document.body.querySelector('.preview-poster').remove()
+            useNewMethod && document.body.querySelector('.preview-poster').remove()
             LoaderShow(document.getElementById('iframe'))
 
             fetch('https:'+iframeSrc+'?api_token=' + VIDEO_CDN_API_TOKEN)
                 .then((response) => {
                     response.text()
                         .then((raw) => {
-/*
-                            const clearRaw = raw.replace(/\n/g, '')
-                                .replaceAll(/link/g, 'link-bac')
-                                .replaceAll(/script/g, 'script-bac')
 
-                            let trashElement = document.createElement('div');
-                            trashElement.innerHTML = clearRaw
-                            document.body.append(trashElement);
-
-                            // const translations = clearRaw.match(/translations"[^>]*>(.*<\/select>)/)[1]
-                            const translations = trashElement.querySelector(".translations")
-                            document.getElementById("iframe").append(translations)
-
-                            // document.body.querySelector(".videoContainer").addEventListener("mousemove", () => {
-                            //     translations.classList.add("active")
-                            //     setTimeout(() => {
-                            //         translations.classList.remove("active")
-                            //     }, 2000)
-                            // })
-
-                            const filesRaw = JSON.parse(trashElement.querySelector("#files").value)
-                            // const filesRaw = JSON.parse(clearRaw.match(/id="files" (value=['|"])(.*?)['|"]*>/)[2])
-
-                            trashElement.remove()
-
-                            let files = {}
-
-                            const getQuality = (data) => {
-                                const res = data.match(/[\[](.*)[\]](.*)/)
-                                const qualityType = res[1]
-                                const qualityLink = res[2]
-                                return {
-                                    qualityType: qualityType,
-                                    qualityLink: qualityLink
-                                }
+                            // new method
+                            if (useNewMethod) {
+                                generateVideoContainer(raw)
+                                return
                             }
-
-                            const getQualityLink = (qualityArr) => {
-                                let currentLink = qualityArr["1080p"]
-                                if (!qualityArr["1080p"]) {
-                                    currentLink = qualityArr["720p"]
-                                } else if (!qualityArr["720p"]) {
-                                    currentLink = qualityArr["480p"]
-                                } else if (!qualityArr["480p"]) {
-                                    currentLink = qualityArr["360p"]
-                                } else if (!qualityArr["360p"]) {
-                                    currentLink = qualityArr["240p"]
-                                }
-                                return currentLink
-                            }
-
-                            Object.keys(filesRaw).forEach((translation) => {
-
-                                if (!files[translation]) {
-                                    files[translation] = {}
-                                }
-
-                                const data = filesRaw[translation]
-                                if (typeof data === "string") {
-                                    const qualityArr = data.split(',')
-                                    qualityArr.forEach((quality) => {
-                                        // const res = quality.match(/[\[](.*)[\]](.*)/)
-                                        // const qualityType = res[1]
-                                        // const qualityLink = res[2]
-
-                                        const {qualityType, qualityLink} = getQuality(quality)
-                                        files[translation][qualityType] = qualityLink
-
-                                    })
-                                } else {
-                                    const seasons = data
-                                    seasons.forEach((season, seasonIndex) => {
-                                        // const seasonTitle = season.comment
-                                        if (!files[translation][seasonIndex]) {
-                                            files[translation][seasonIndex] = {}
-                                        }
-                                        const series = season.folder
-                                        series.forEach((seriesItem, index) => {
-                                            if (!files[translation][seasonIndex][index]) {
-                                                files[translation][seasonIndex][index] = {}
-                                            }
-                                            const seriesItemFiles = seriesItem.file
-                                            const qualityArr = seriesItemFiles.split(',')
-                                            qualityArr.forEach((quality) => {
-                                                const {qualityType, qualityLink} = getQuality(quality)
-                                                files[translation][seasonIndex][index][qualityType] = qualityLink
-                                            })
-                                        })
-                                    })
-                                }
-                            })
-
-                            const getSeasons = (seasons) => {
-                                document.getElementById("iframe")?.querySelector(".seasons")?.remove()
-                                let seasonsContainer = document.createElement('div')
-                                seasonsContainer.classList.add("seasons")
-                                let seasonsSelector = document.createElement('select')
-                                seasonsContainer.append(seasonsSelector)
-                                Object.keys(seasons).forEach((index) => {
-                                    let seasonOption = document.createElement('option')
-                                    seasonOption.label = `${Number(index) + 1} сезон`
-                                    seasonOption.value = index
-                                    if (index === "0") {
-                                        seasonOption.selected = true
-                                    }
-                                    seasonsSelector.append(seasonOption)
-                                })
-                                document.getElementById("iframe").append(seasonsContainer)
-
-                                getSeries(files[translationsSelect.value][seasonsSelector.value])
-
-                                seasonsSelector.addEventListener("change", () => {
-                                    const currentLink = getQualityLink(files[translationsSelect.value][seasonsSelector.value][0])
-                                    getSeries(files[translationsSelect.value][seasonsSelector.value])
-                                    setVideo(currentLink, document.body.querySelector(".videoContainer"))
-                                })
-                            }
-
-                            const getSeries = (series) => {
-                                document.getElementById("iframe")?.querySelector(".series")?.remove()
-
-                                const seasonsSelector = document.getElementById("iframe").querySelector(".seasons select")
-
-                                let seriesContainer = document.createElement('div')
-                                seriesContainer.classList.add("series")
-                                let seriesSelector = document.createElement('select')
-                                seriesContainer.append(seriesSelector)
-                                Object.keys(series).forEach((index) => {
-                                    let seasonOption = document.createElement('option')
-                                    seasonOption.label = `${Number(index) + 1} серия`
-                                    seasonOption.value = index
-                                    if (index === "0") {
-                                        seasonOption.selected = true
-                                    }
-                                    seriesSelector.append(seasonOption)
-                                })
-                                document.getElementById("iframe").append(seriesContainer)
-
-                                seriesSelector.addEventListener("change", () => {
-                                    const currentLink = getQualityLink(files[translationsSelect.value][seasonsSelector.value][seriesSelector.value])
-                                    setVideo(currentLink, document.body.querySelector(".videoContainer"))
-                                })
-                            }
-
-                            const translationsSelect = translations.querySelector("select")
-                            translationsSelect.addEventListener("change", () => {
-                                const currentLink = typeof filesRaw[translationsSelect.value] === "string"
-                                    ? getQualityLink(files[translationsSelect.value])
-                                    : getQualityLink(files[translationsSelect.value][0][0])
-                                setVideo(currentLink, document.body.querySelector(".videoContainer"))
-                                if (typeof filesRaw[translationsSelect.value] !== "string") {
-                                    getSeasons(files[translationsSelect.value])
-                                }
-                            })
-
-                            document.body.querySelector(".videoContainer").style.height = "100%"
-                            const currentLink = typeof filesRaw[translationsSelect.value] === "string"
-                                ? getQualityLink(files[translationsSelect.value])
-                                : getQualityLink(files[translationsSelect.value][0][0])
-                            if (typeof filesRaw[translationsSelect.value] !== "string") {
-                                getSeasons(files[translationsSelect.value])
-                            }
-                            setVideo(currentLink, document.body.querySelector(".videoContainer"))
-                            LoaderHide()
-
-                            return*/
 
                             const domain = data.iframe_src.split("/")
 
@@ -535,6 +417,223 @@
                         });
                 });
 
+        }
+
+        const generateVideoContainer = (raw) => {
+            putWatched()
+            const clearRaw = raw.replace(/\n/g, '')
+                .replaceAll(/link/g, 'link-bac')
+                .replaceAll(/script/g, 'script-bac')
+
+            let trashElement = document.createElement('div');
+            trashElement.innerHTML = clearRaw
+            document.body.append(trashElement);
+
+            const translations = trashElement.querySelector(".translations")
+            document.getElementById("iframe").append(translations)
+
+            const filesRaw = JSON.parse(trashElement.querySelector("#files").value)
+
+            trashElement.remove()
+
+            let files = {}
+
+            const getQuality = (data) => {
+                const res = data.match(/[\[](.*)[\]](.*)/)
+                const qualityType = res[1]
+                const qualityLink = res[2]
+                return {
+                    qualityType: qualityType,
+                    qualityLink: qualityLink
+                }
+            }
+
+            const getQualityLink = (qualityArr) => {
+                if (filmObject.was.quality) return qualityArr[filmObject.was.quality]
+                let currentLink = qualityArr["1080p"]
+                if (!qualityArr["1080p"]) {
+                    currentLink = qualityArr["720p"]
+                } else if (!qualityArr["720p"]) {
+                    currentLink = qualityArr["480p"]
+                } else if (!qualityArr["480p"]) {
+                    currentLink = qualityArr["360p"]
+                } else if (!qualityArr["360p"]) {
+                    currentLink = qualityArr["240p"]
+                }
+                return currentLink
+            }
+
+            Object.keys(filesRaw).forEach((translation) => {
+
+                if (!files[translation]) {
+                    files[translation] = {}
+                }
+
+                const data = filesRaw[translation]
+                if (typeof data === "string") {
+                    const qualityArr = data.split(',')
+                    qualityArr.forEach((quality) => {
+                        const {qualityType, qualityLink} = getQuality(quality)
+                        files[translation][qualityType] = qualityLink
+                    })
+                } else {
+                    const seasons = data
+                    seasons.forEach((season, seasonIndex) => {
+                        // const seasonTitle = season.comment
+                        if (!files[translation][seasonIndex]) {
+                            files[translation][seasonIndex] = {}
+                        }
+                        const series = season.folder
+                        series.forEach((seriesItem, index) => {
+                            if (!files[translation][seasonIndex][index]) {
+                                files[translation][seasonIndex][index] = {}
+                            }
+                            const seriesItemFiles = seriesItem.file
+                            const qualityArr = seriesItemFiles.split(',')
+                            qualityArr.forEach((quality) => {
+                                const {qualityType, qualityLink} = getQuality(quality)
+                                files[translation][seasonIndex][index][qualityType] = qualityLink
+                            })
+                        })
+                    })
+                }
+            })
+
+            const createSeasonsSelector = (seasons) => {
+                document.getElementById("iframe")?.querySelector(".seasons")?.remove()
+                let seasonsContainer = document.createElement('div')
+                seasonsContainer.classList.add("seasons")
+                let seasonsSelector = document.createElement('select')
+                seasonsContainer.append(seasonsSelector)
+                Object.keys(seasons).forEach((index) => {
+                    let seasonOption = document.createElement('option')
+                    seasonOption.label = `${Number(index) + 1} сезон`
+                    seasonOption.value = index
+                    if (index === (filmObject.was.season || "0")) {
+                        seasonOption.selected = true
+                    }
+                    seasonsSelector.append(seasonOption)
+                })
+                document.getElementById("iframe").append(seasonsContainer)
+
+                createSeriesSelector(files[translationsSelect.value][seasonsSelector.value])
+
+                seasonsSelector.addEventListener("change", () => {
+                    updateWatchedTime({time: 0})
+                    createSeriesSelector(files[translationsSelect.value][seasonsSelector.value])
+                })
+            }
+
+            const createSeriesSelector = (series) => {
+                document.getElementById("iframe")?.querySelector(".series")?.remove()
+
+                const seasonsSelector = document.getElementById("iframe").querySelector(".seasons select")
+
+                let seriesContainer = document.createElement('div')
+                seriesContainer.classList.add("series")
+                let seriesSelector = document.createElement('select')
+                seriesContainer.append(seriesSelector)
+                Object.keys(series).forEach((index) => {
+                    let seasonOption = document.createElement('option')
+                    seasonOption.label = `${Number(index) + 1} серия`
+                    seasonOption.value = index
+                    if (index === (filmObject.was.series || "0")) {
+                        seasonOption.selected = true
+                    }
+                    seriesSelector.append(seasonOption)
+                })
+                document.getElementById("iframe").append(seriesContainer)
+                createQualitySelector(files[translationsSelect.value][seasonsSelector.value][filmObject.was.series || 0])
+
+                seriesSelector.addEventListener("change", () => {
+                    updateWatchedTime({time: 0})
+                    createQualitySelector(files[translationsSelect.value][seasonsSelector.value][seriesSelector.value])
+                })
+            }
+
+            let timerForTime = null
+
+            const createQualitySelector = (qualityArr) => {
+                document.getElementById("iframe")?.querySelector(".quality")?.remove()
+                let qualityContainer = document.createElement('div')
+                qualityContainer.classList.add("quality")
+                let qualitySelector = document.createElement('select')
+                qualityContainer.append(qualitySelector)
+                let lastQuality = null
+                Object.keys(qualityArr).forEach((qualityType) => {
+                    let qualityOption = document.createElement('option')
+                    qualityOption.label = qualityType
+                    qualityOption.value = qualityArr[qualityType]
+                    lastQuality = qualityType
+                    qualitySelector.append(qualityOption)
+                })
+                qualitySelector.querySelector(`[label='${(filmObject.was.quality || lastQuality)}']`).selected = true
+                document.getElementById("iframe").append(qualityContainer)
+
+                const seasonsSelector = document.getElementById("iframe").querySelector(".seasons select")
+                const seriesSelector = document.getElementById("iframe").querySelector(".series select")
+
+                updateWatchedTime({
+                    translate: translationsSelect.value,
+                    season: seasonsSelector.value,
+                    series: seriesSelector.value,
+                    quality: qualitySelector.selectedOptions[0].getAttribute("label"),
+                    time: filmObject.was.time,
+                })
+                setVideo(qualitySelector.value, document.body.querySelector(".videoContainer"), filmObject.was.time)
+
+                clearInterval(timerForTime)
+                timerForTime = setInterval(() => {
+                    updateWatchedTime({
+                        translate: translationsSelect.value,
+                        season: seasonsSelector.value,
+                        series: seriesSelector.value,
+                        quality: qualitySelector.selectedOptions[0].getAttribute("label"),
+                        time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
+                    })
+                }, 5000)
+
+                qualitySelector.addEventListener("change", () => {
+                    setVideo(qualitySelector.value, document.body.querySelector(".videoContainer"), filmObject.was.time)
+
+                    clearInterval(timerForTime)
+                    timerForTime = setInterval(() => {
+                        updateWatchedTime({
+                            translate: translationsSelect.value,
+                            season: seasonsSelector.value,
+                            series: seriesSelector.value,
+                            quality: qualitySelector.selectedOptions[0].getAttribute("label"),
+                            time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
+                        })
+                    }, 5000)
+                })
+            }
+
+            const translationsSelect = translations.querySelector("select")
+            translationsSelect.value = filmObject.was.translate
+            updateWatchedTime({translate: translationsSelect.value})
+            translationsSelect.addEventListener("change", () => {
+                updateWatchedTime({time: 0})
+                if (typeof filesRaw[translationsSelect.value] === "string") {
+                    createQualitySelector(files[translationsSelect.value])
+                } else {
+                    createSeasonsSelector(files[translationsSelect.value])
+                }
+            })
+
+            document.body.querySelector(".videoContainer").style.height = "100%"
+            const currentLink = typeof filesRaw[translationsSelect.value] === "string"
+                ? getQualityLink(files[translationsSelect.value])
+                : getQualityLink(files[translationsSelect.value][0][0])
+            if (typeof filesRaw[translationsSelect.value] === "string") {
+                createQualitySelector(files[translationsSelect.value])
+                document.getElementById("iframe").classList.remove("isSerial")
+            } else {
+                createSeasonsSelector(files[translationsSelect.value])
+                document.getElementById("iframe").classList.add("isSerial")
+            }
+
+            LoaderHide()
         }
 
     </script>
