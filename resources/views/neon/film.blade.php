@@ -515,7 +515,7 @@
                 createSeriesSelector(files[translationsSelect.value][seasonsSelector.value])
 
                 seasonsSelector.addEventListener("change", () => {
-                    updateWatchedTime({time: 0})
+                    updateWatchedTime({series: 0, quality: 0, time: 0})
                     createSeriesSelector(files[translationsSelect.value][seasonsSelector.value])
                 })
             }
@@ -542,7 +542,7 @@
                 createQualitySelector(files[translationsSelect.value][seasonsSelector.value][filmObject.was.series || 0])
 
                 seriesSelector.addEventListener("change", () => {
-                    updateWatchedTime({time: 0})
+                    updateWatchedTime({quality: 0, time: 0})
                     createQualitySelector(files[translationsSelect.value][seasonsSelector.value][seriesSelector.value])
                 })
             }
@@ -609,7 +609,7 @@
             filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
             updateWatchedTime({translate: translationsSelect.value})
             translationsSelect.addEventListener("change", () => {
-                updateWatchedTime({time: 0})
+                updateWatchedTime({season: 0, series: 0, quality: 0, time: 0})
                 if (typeof filesRaw[translationsSelect.value] === "string") {
                     createQualitySelector(files[translationsSelect.value])
                 } else {
