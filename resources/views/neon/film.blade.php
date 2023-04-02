@@ -241,13 +241,13 @@
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    videoElement.play();
+                    // videoElement.play();
                     videoElement.currentTime = Number(startTime)
                 });
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
-                    videoElement.play();
+                    // videoElement.play();
                     videoElement.currentTime = Number(startTime)
                 });
             }
@@ -340,7 +340,7 @@
 
             const iframeSrc = data.iframe_src;
 
-            useNewMethod && document.body.querySelector('.preview-poster').remove()
+            useNewMethod && document.body.querySelector('.preview-poster')?.remove()
             LoaderShow(document.getElementById('iframe'))
 
             fetch('https:'+iframeSrc+'?api_token=' + VIDEO_CDN_API_TOKEN)
@@ -366,12 +366,8 @@
                                 // .replaceAll('head', 'div')
                                 // .replaceAll('body', 'div')
 
-                            // console.log(newIframe)
-
                             // let math1 = newIframe.match(/<html[^>]+>(.*)<\/html>/);
                             let math1 = newIframe.match(/<html>(.*)<\/html>/);
-
-                            // console.log(math1)
 
                             document.getElementById('iframe').innerHTML = math1[1];
                             // document.getElementById('iframe').innerHTML = data.iframe;
@@ -575,8 +571,8 @@
 
                 updateWatchedTime({
                     translate: translationsSelect.value,
-                    season: seasonsSelector.value,
-                    series: seriesSelector.value,
+                    season: seasonsSelector?.value,
+                    series: seriesSelector?.value,
                     quality: qualitySelector.selectedOptions[0].getAttribute("label"),
                     time: filmObject.was.time,
                 })
@@ -586,8 +582,8 @@
                 timerForTime = setInterval(() => {
                     updateWatchedTime({
                         translate: translationsSelect.value,
-                        season: seasonsSelector.value,
-                        series: seriesSelector.value,
+                        season: seasonsSelector?.value,
+                        series: seriesSelector?.value,
                         quality: qualitySelector.selectedOptions[0].getAttribute("label"),
                         time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
                     })
@@ -600,8 +596,8 @@
                     timerForTime = setInterval(() => {
                         updateWatchedTime({
                             translate: translationsSelect.value,
-                            season: seasonsSelector.value,
-                            series: seriesSelector.value,
+                            season: seasonsSelector?.value,
+                            series: seriesSelector?.value,
                             quality: qualitySelector.selectedOptions[0].getAttribute("label"),
                             time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
                         })
@@ -610,7 +606,7 @@
             }
 
             const translationsSelect = translations.querySelector("select")
-            translationsSelect.value = filmObject.was.translate
+            filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
             updateWatchedTime({translate: translationsSelect.value})
             translationsSelect.addEventListener("change", () => {
                 updateWatchedTime({time: 0})
@@ -622,9 +618,6 @@
             })
 
             document.body.querySelector(".videoContainer").style.height = "100%"
-            const currentLink = typeof filesRaw[translationsSelect.value] === "string"
-                ? getQualityLink(files[translationsSelect.value])
-                : getQualityLink(files[translationsSelect.value][0][0])
             if (typeof filesRaw[translationsSelect.value] === "string") {
                 createQualitySelector(files[translationsSelect.value])
                 document.getElementById("iframe").classList.remove("isSerial")
