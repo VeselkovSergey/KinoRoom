@@ -658,8 +658,10 @@
         }
 
         document.body.addEventListener("customEndedVideo", () => {
-            console.log(123)
             const seriesSelector = document.getElementById("iframe").querySelector(".series select")
+            if (!seriesSelector) {
+                return
+            }
             const selectedIndex = seriesSelector.selectedIndex
             const countOptions = seriesSelector.childNodes.length - 1
             if ((selectedIndex + 1) <= countOptions) {
