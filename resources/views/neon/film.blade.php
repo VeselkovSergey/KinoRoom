@@ -406,13 +406,13 @@
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    // videoElement.play();
+                    videoElement.play();
                     videoElement.currentTime = Number(startTime)
                 });
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
-                    // videoElement.play();
+                    videoElement.play();
                     videoElement.currentTime = Number(startTime)
                 });
             }
@@ -429,9 +429,13 @@
             })
 
             videoElement.addEventListener("timeupdate", () => {
-                console.log(videoElement.duration, videoElement.currentTime)
+                // console.log(videoElement.duration, videoElement.currentTime)
                 timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
                 progressLine.style.width = `${videoElement.currentTime / videoElement.duration * 100}%`
+            })
+
+            videoElement.addEventListener("ended", () => {
+                triggerEvent(document.body, "customEndedVideo")
             })
 
             const playPauseButton = document.body.querySelector(".play-pause-button")
@@ -648,6 +652,21 @@
                 });
 
         }
+
+        function triggerEvent(elem, event) {
+            elem.dispatchEvent(new Event(event));
+        }
+
+        document.body.addEventListener("customEndedVideo", () => {
+            console.log(123)
+            const seriesSelector = document.getElementById("iframe").querySelector(".series select")
+            const selectedIndex = seriesSelector.selectedIndex
+            const countOptions = seriesSelector.childNodes.length - 1
+            if ((selectedIndex + 1) <= countOptions) {
+                seriesSelector.selectedIndex = selectedIndex + 1
+                triggerEvent(seriesSelector, "change")
+            }
+        })
 
         const generateVideoContainer = (raw) => {
             putWatched()
