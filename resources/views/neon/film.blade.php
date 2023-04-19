@@ -404,7 +404,7 @@
                     controlsContainer.classList.add("show")
                     timerContainerShow = setTimeout(() => {
                         controlsContainer.classList.remove("show")
-                    }, 3000)
+                    }, 6000)
                 }
             }
             let timerContainerShow = null
