@@ -60,7 +60,7 @@
 
         @media screen and (max-width: 768px) {
             #iframe {
-                /*height: 180px;*/
+                min-height: 180px;
             }
 
             .red-button-with-animate {
