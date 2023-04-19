@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>NeonFilms</title>
+    <title>{{isset($filmInfo) ? "Смотреть онлайн " . ($filmInfo->title ?? $filmInfo->name) : "NeonFilms"}}</title>
 
     <link href="{{asset('assets/styles/helpers.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('assets/img/logo.png')}}" type="image/x-icon">
 
-    <meta name="description" content="NeonFilms или Неонфильмс или как еще нас называют neon films или неон фильм, предлаегает фильм или сериал смотреть онлайн в высоком качестве. Подскажет что посмотреть в {{now()->format("Y")}} году и какой фильм посмотреть сегодня, а так же какой сериал посмотреть завтра">
-    <meta name="keywords" content="neonfilms, neon films, неонфилмс, неон филмс, неонфилмз, неон филмз, неонфильмс, неон фильмс, неофильмз, неон фильмз">
+    <meta name="description" content="NeonFilms или Неонфильмс или как еще нас называют neon films или неон фильм, предлаегает {{isset($filmInfo) ? ($filmInfo->title ?? $filmInfo->name) : ""}} смотреть онлайн в высоком качестве. Подскажет что посмотреть в {{now()->format("Y")}} году и какой фильм посмотреть сегодня, а так же какой сериал посмотреть завтра">
+    <meta name="keywords" content="{{isset($filmInfo) ? "Смотреть онлайн " . ($filmInfo->title ?? $filmInfo->name) : ""}} neonfilms, neon films, неонфилмс, неон филмс, неонфилмз, неон филмз, неонфильмс, неон фильмс, неофильмз, неон фильмз">
 
     <style>
         * {
