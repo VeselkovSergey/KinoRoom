@@ -127,57 +127,57 @@
             background-color: black;
         }
 
-        #iframe:hover .translations {
-            opacity: 1;
-        }
+        /*#iframe:hover .translations {*/
+        /*    opacity: 1;*/
+        /*}*/
 
-        .translations {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            opacity: 0;
-        }
+        /*.translations {*/
+        /*    position: absolute;*/
+        /*    top: 10px;*/
+        /*    left: 10px;*/
+        /*    !*opacity: 0;*!*/
+        /*}*/
 
-        #iframe:hover .seasons {
-            opacity: 1;
-        }
+        /*#iframe:hover .seasons {*/
+        /*    opacity: 1;*/
+        /*}*/
 
-        .seasons {
-            position: absolute;
-            top: 35px;
-            left: 10px;
-            opacity: 0;
-        }
+        /*.seasons {*/
+        /*    position: absolute;*/
+        /*    top: 35px;*/
+        /*    left: 10px;*/
+        /*    !*opacity: 0;*!*/
+        /*}*/
 
-        #iframe:hover .series {
-            opacity: 1;
-        }
+        /*#iframe:hover .series {*/
+        /*    opacity: 1;*/
+        /*}*/
 
-        .series {
-            position: absolute;
-            top: 60px;
-            left: 10px;
-            opacity: 0;
-        }
+        /*.series {*/
+        /*    position: absolute;*/
+        /*    top: 60px;*/
+        /*    left: 10px;*/
+        /*    !*opacity: 0;*!*/
+        /*}*/
 
-        #iframe:hover .quality {
-            opacity: 1;
-        }
+        /*#iframe:hover .quality {*/
+        /*    opacity: 1;*/
+        /*}*/
 
-        .quality {
-            position: absolute;
-            top: 35px;
-            left: 10px;
-            opacity: 0;
-        }
+        /*.quality {*/
+        /*    position: absolute;*/
+        /*    top: 35px;*/
+        /*    left: 10px;*/
+        /*    !*opacity: 0;*!*/
+        /*}*/
 
-        #iframe.isSerial .quality {
-            top: 85px;
-        }
+        /*#iframe.isSerial .controls.quality {*/
+        /*    top: 85px;*/
+        /*}*/
 
-        .seasons, .series, .translations, .quality {
-            max-width: calc(100% - 20px);
-        }
+        /*.seasons, .series, .translations, .quality {*/
+        /*    max-width: calc(100% - 20px);*/
+        /*}*/
     </style>
 
     {{--    <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>--}}
@@ -271,15 +271,36 @@
                         }
 
                         .controls {
-                            display: none;
+                            /*display: none;*/
                         }
 
-                        #iframe:hover .controls.active {
+                        .controls.active.show {
                             display: block;
                         }
 
                         .up-control > *:not(:last-child) {
                             margin-right: 20px;
+                        }
+
+                        #iframe .controls .menu-button {
+                            position: relative;
+                        }
+
+                        #iframe .controls .menu-button .settings-container {
+                            display: none;
+                            position: absolute;
+                            bottom: 30px;
+                            right: 0;
+                            padding-bottom: 10px;
+                        }
+
+                        #iframe .controls .menu-button:active .settings-container,
+                        #iframe .controls .menu-button:hover .settings-container {
+                            display: block;
+                        }
+
+                        #iframe .controls .menu-button .settings-container select {
+                            width: 150px;
                         }
 
                     </style>
@@ -361,15 +382,17 @@
                                                     d="M0 12.5v-9A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5zM2.5 4a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 1 0V5h2.5a.5.5 0 0 0 0-1h-3zm11 8a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-1 0V11h-2.5a.5.5 0 0 0 0 1h3z"></path>
                                             </svg>
                                         </div>
-{{--                                        <div class="menu-button"--}}
-{{--                                             style="display: flex; display: none; justify-content: center; align-items: center; padding: 8px;border-radius: 30px;">--}}
-{{--                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"--}}
-{{--                                                 fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">--}}
-{{--                                                <path--}}
-{{--                                                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"></path>--}}
-{{--                                            </svg>--}}
-{{--                                            <div class="quality-selector"></div>--}}
-{{--                                        </div>--}}
+                                        <div class="menu-button"
+                                             style="display: flex; justify-content: center; align-items: center; padding: 8px;border-radius: 30px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"></path>
+                                            </svg>
+                                            <div class="settings-container">
+
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="progress-bar"
                                          style="border-radius: 10px;width: 100%;background-color: #2f2f2f;height: 5px;display: flex;align-items: center;">
@@ -426,6 +449,20 @@
                     controlsContainer.classList.add("active")
                 });
             }
+
+            const showControlContainer = () => {
+                if (controlsContainer.classList.contains("active")) {
+                    clearTimeout(timerContainerShow)
+                    controlsContainer.classList.add("show")
+                    timerContainerShow = setTimeout(() => {
+                        controlsContainer.classList.remove("show")
+                    }, 3000)
+                }
+            }
+            let timerContainerShow = null
+            container.addEventListener("mousemove", showControlContainer)
+            container.addEventListener("touchmove", showControlContainer)
+
 
             const timeContainer = document.body.querySelector(".time")
             const progressLine = document.body.querySelector(".progress")
@@ -686,7 +723,7 @@
         }
 
         document.body.addEventListener("customEndedVideo", () => {
-            const seriesSelector = document.getElementById("iframe").querySelector(".series select")
+            const seriesSelector = document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".series select")
             if (!seriesSelector) {
                 return
             }
@@ -726,7 +763,7 @@
                 translations.append(translationsSelector)
             }
 
-            document.getElementById("iframe").append(translations)
+            document.querySelector("#iframe .controls .menu-button .settings-container").append(translations)
 
             trashElement.remove()
 
@@ -794,7 +831,7 @@
             })
 
             const createSeasonsSelector = (seasons) => {
-                document.getElementById("iframe")?.querySelector(".seasons")?.remove()
+                document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".seasons")?.remove()
                 let seasonsContainer = document.createElement('div')
                 seasonsContainer.classList.add("seasons")
                 let seasonsSelector = document.createElement('select')
@@ -808,7 +845,7 @@
                     }
                     seasonsSelector.append(seasonOption)
                 })
-                document.getElementById("iframe").append(seasonsContainer)
+                document.querySelector("#iframe .controls .menu-button .settings-container").append(seasonsContainer)
 
                 createSeriesSelector(files[translationsSelect.value][seasonsSelector.value])
 
@@ -819,9 +856,9 @@
             }
 
             const createSeriesSelector = (series) => {
-                document.getElementById("iframe")?.querySelector(".series")?.remove()
+                document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".series")?.remove()
 
-                const seasonsSelector = document.getElementById("iframe").querySelector(".seasons select")
+                const seasonsSelector = document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".seasons select")
 
                 let seriesContainer = document.createElement('div')
                 seriesContainer.classList.add("series")
@@ -836,7 +873,7 @@
                     }
                     seriesSelector.append(seasonOption)
                 })
-                document.getElementById("iframe").append(seriesContainer)
+                document.querySelector("#iframe .controls .menu-button .settings-container").append(seriesContainer)
                 createQualitySelector(files[translationsSelect.value][seasonsSelector.value][filmObject.was.series || 0])
 
                 seriesSelector.addEventListener("change", () => {
@@ -848,7 +885,7 @@
             let timerForTime = null
 
             const createQualitySelector = (qualityArr) => {
-                document.getElementById("iframe")?.querySelector(".quality")?.remove()
+                document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".quality")?.remove()
                 let qualityContainer = document.createElement('div')
                 qualityContainer.classList.add("quality")
                 let qualitySelector = document.createElement('select')
@@ -866,10 +903,10 @@
                 } catch (e) {
                     qualitySelector.querySelector(`[label='${(lastQuality)}']`).selected = true
                 }
-                document.getElementById("iframe").append(qualityContainer)
+                document.querySelector("#iframe .controls .menu-button .settings-container").append(qualityContainer)
 
-                const seasonsSelector = document.getElementById("iframe").querySelector(".seasons select")
-                const seriesSelector = document.getElementById("iframe").querySelector(".series select")
+                const seasonsSelector = document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".seasons select")
+                const seriesSelector = document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".series select")
 
                 updateWatchedTime({
                     translate: translationsSelect?.value,
