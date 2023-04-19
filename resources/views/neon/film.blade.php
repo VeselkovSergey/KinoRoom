@@ -261,6 +261,27 @@
                             opacity: 1;
                         }
 
+                        input[type="range"] {
+                            border: unset;
+                            outline: unset;
+                            box-shadow: unset;
+                            padding: 0;
+                            margin: 0;
+                            cursor: pointer;
+                        }
+
+                        .controls {
+                            display: none;
+                        }
+
+                        #iframe:hover .controls.active {
+                            display: block;
+                        }
+
+                        .up-control > *:not(:last-child) {
+                            margin-right: 20px;
+                        }
+
                     </style>
 
                     <div class="iframe-container">
@@ -281,11 +302,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="display: none; position: absolute;color: white;bottom: 10px;width: 100%;">
+
+                            <div class="controls" style="position: absolute;color: white;bottom: 10px;width: 100%;">
                                 <div style="padding: 0 15px;">
-                                    <div style="display: flex;margin-bottom: 10px;">
+                                    <div class="up-control" style="display: flex;margin-bottom: 10px;">
                                         <div class="play-pause-button"
-                                             style="margin-right: 10px;display: flex;justify-content: center;align-items: center; padding: 8px;border-radius: 30px;"
+                                             style="display: flex;justify-content: center;align-items: center; padding: 8px;border-radius: 30px; cursor: pointer;"
                                              onclick="this.classList.toggle('paused')">
                                             <svg data-type="play" xmlns="http://www.w3.org/2000/svg" width="20"
                                                  height="20" fill="currentColor" class="bi bi-play-fill"
@@ -301,22 +323,16 @@
                                             </svg>
                                         </div>
                                         <div class="time" style="display: flex; align-items: center; margin-right: auto;">
-                                            XX:XX / XX:XX
+                                            00:00 / 00:00
                                         </div>
                                         <div class="volume-container"
-                                             style="display: flex;justify-content: center;align-items: center;margin-right: 20px;padding: 8px 10px;border-radius: 30px;">
+                                             style="display: flex;justify-content: center;align-items: center;padding: 8px 10px;border-radius: 30px;">
                                             <div class="volume-bar"
-                                                 style="width: 100px;background-color: #2f2f2f;height: 5px;display: flex;align-items: center;margin-right: 10px;border-radius: 10px;">
-                                                <div class="volume-line"
-                                                     style="width: 20%;background-color: white;height: 5px;border-radius: 10px;"></div>
-                                                <div class="volume-point-wrapper"
-                                                     style="position: relative;display: flex;align-items: center;">
-                                                    <div
-                                                        style="width: 12px;background-color: white;height: 12px;border-radius: 12px;position: absolute;left: -6px;"></div>
-                                                </div>
+                                                 style="width: 100px;background-color: #2f2f2f;height: 5px;display: flex;align-items: center;margin-right: 10px;border-radius: 10px; display: none;">
+                                                <input type="range" min="0" max="100" value="100">
                                             </div>
                                             <div class="volume-mute-container"
-                                                 style="display: flex; justify-content: center; align-items: center;"
+                                                 style="display: flex; justify-content: center; align-items: center; cursor: pointer;"
                                                  onclick="this.classList.toggle('muted')">
                                                 <svg data-type="volume" xmlns="http://www.w3.org/2000/svg" width="20"
                                                      height="20" fill="currentColor" class="bi bi-volume-up-fill"
@@ -337,7 +353,7 @@
                                             </div>
                                         </div>
                                         <div class="full-screen-button"
-                                             style="display: flex; justify-content: center; align-items: center; margin-right: 20px; padding: 8px;border-radius: 30px;">
+                                             style="display: flex; justify-content: center; align-items: center; padding: 8px;border-radius: 30px; cursor:pointer;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                  fill="currentColor" class="bi bi-aspect-ratio-fill"
                                                  viewBox="0 0 16 16">
@@ -345,25 +361,19 @@
                                                     d="M0 12.5v-9A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5zM2.5 4a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 1 0V5h2.5a.5.5 0 0 0 0-1h-3zm11 8a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-1 0V11h-2.5a.5.5 0 0 0 0 1h3z"></path>
                                             </svg>
                                         </div>
-                                        <div class="menu-button"
-                                             style="display: flex; justify-content: center; align-items: center; padding: 8px;border-radius: 30px;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                 fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"></path>
-                                            </svg>
-                                            <div class="quality-selector"></div>
-                                        </div>
+{{--                                        <div class="menu-button"--}}
+{{--                                             style="display: flex; display: none; justify-content: center; align-items: center; padding: 8px;border-radius: 30px;">--}}
+{{--                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"--}}
+{{--                                                 fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">--}}
+{{--                                                <path--}}
+{{--                                                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"></path>--}}
+{{--                                            </svg>--}}
+{{--                                            <div class="quality-selector"></div>--}}
+{{--                                        </div>--}}
                                     </div>
                                     <div class="progress-bar"
                                          style="border-radius: 10px;width: 100%;background-color: #2f2f2f;height: 5px;display: flex;align-items: center;">
-                                        <div class="progress"
-                                             style="width: 0%;background-color: white;height: 5px;border-radius: 10px;"></div>
-                                        <div class="progress-point-wrapper"
-                                             style="position: relative;display: flex;align-items: center;">
-                                            <div
-                                                style="width: 12px;background-color: white;height: 12px;border-radius: 12px;position: absolute;left: -6px;"></div>
-                                        </div>
+                                        <input class="progress" type="range" min="0" max="100" value="100">
                                     </div>
                                 </div>
                             </div>
@@ -389,53 +399,71 @@
             return `${hours > 0 ? hours + ":" : ""}${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`
         }
 
-        // const link = "//cloud.cdnland.in/797b1976a2317ccc03e2506170aaddc3:2023040115/movies/df8229e4592978f160c2ad69a5139cd86ab745ce/1080.mp4:hls:manifest.m3u8"
-
         function setVideo(link, container, startTime = 0) {
 
             container.innerHTML = ""
 
             const videoElement = document.createElement('video');
-            videoElement.setAttribute("controls", "")
             // videoElement.setAttribute("controls", "")
             container.append(videoElement)
 
+            const controlsContainer = document.body.querySelector(".controls")
+
             if (Hls.isSupported()) {
-                // var videoElement = document.getElementById('video');
                 var hls = new Hls();
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
                     videoElement.play();
                     videoElement.currentTime = Number(startTime)
+                    controlsContainer.classList.add("active")
                 });
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
                     videoElement.play();
                     videoElement.currentTime = Number(startTime)
+                    controlsContainer.classList.add("active")
                 });
             }
 
             const timeContainer = document.body.querySelector(".time")
             const progressLine = document.body.querySelector(".progress")
-
-            const progressPoint = document.body.querySelector(".progress-point-wrapper")
-            progressPoint.addEventListener("mousedown", (event) => {
-
+            progressLine.addEventListener("change", (event) => {
+                videoElement.currentTime = Number(progressLine.value)
             })
-            progressPoint.addEventListener("mouseup", (event) => {
 
+            const volumeLine = document.body.querySelector(".volume-bar input[type='range']")
+            volumeLine.addEventListener("input", () => {
+                videoElement.muted = false
+                volumeMute.classList.remove("muted")
+                videoElement.volume = Number(volumeLine.value) / 100
             })
+
+            const volumeMute = document.body.querySelector(".volume-mute-container")
+            volumeMute.addEventListener("click", () => {
+                videoElement.muted = volumeMute.classList.contains("muted")
+            })
+
+            videoElement.addEventListener("play", () => {
+                playPauseButton.classList.add("paused")
+            })
+
+            videoElement.addEventListener("pause", () => {
+                playPauseButton.classList.remove("paused")
+            })
+
+            videoElement.volume
 
             videoElement.addEventListener("timeupdate", () => {
-                // console.log(videoElement.duration, videoElement.currentTime)
                 timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
-                progressLine.style.width = `${videoElement.currentTime / videoElement.duration * 100}%`
+                progressLine.setAttribute("max", String(videoElement.duration))
+                progressLine.value = videoElement.currentTime
             })
 
             videoElement.addEventListener("ended", () => {
                 triggerEvent(document.body, "customEndedVideo")
+                videoElement.currentTime = 0
             })
 
             const playPauseButton = document.body.querySelector(".play-pause-button")
