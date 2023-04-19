@@ -249,6 +249,8 @@
 
                         #iframe .controls .menu-button .settings-container select {
                             width: 150px;
+                            padding: 5px 10px;
+                            margin-bottom: 5px;
                         }
 
                     </style>
@@ -405,7 +407,7 @@
                     controlsContainer.classList.add("show")
                     timerContainerShow = setTimeout(() => {
                         controlsContainer.classList.remove("show")
-                    }, 6000)
+                    }, 10 * 1000)
                 }
             }
             container.addEventListener("mousemove", showControlContainer)
@@ -413,15 +415,12 @@
                 if (controlsContainer.classList.contains("active")) {
                     clearTimeout(timerContainerShow)
                     controlsContainer.classList.add("show")
-                    // timerContainerShow = setTimeout(() => {
-                    //     controlsContainer.classList.remove("show")
-                    // }, 10000)
                 }
             })
             container.addEventListener("touchend", () => {
                 timerContainerShow = setTimeout(() => {
                     controlsContainer.classList.remove("show")
-                }, 10000)
+                }, 20 * 1000)
             })
 
 
