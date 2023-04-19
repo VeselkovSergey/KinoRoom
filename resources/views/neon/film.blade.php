@@ -411,8 +411,9 @@
                 }
             }
             container.addEventListener("mousemove", showControlContainer)
-            container.addEventListener("touchstart", () => {
+            container.addEventListener("touchmove", () => {
                 if (controlsContainer.classList.contains("active")) {
+                    clearTimeout(timerContainerShow)
                     controlsContainer.classList.add("show")
                 }
             })
