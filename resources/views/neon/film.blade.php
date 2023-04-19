@@ -466,8 +466,8 @@
 
             videoElement.addEventListener("timeupdate", () => {
                 if (!progressLineIsBlock) {
-                timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
-                progressLine.setAttribute("max", String(videoElement.duration))
+                    timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
+                    progressLine.setAttribute("max", String(videoElement.duration))
                     progressLine.value = videoElement.currentTime
                 }
             })
@@ -528,11 +528,6 @@
                 }
             })
         }
-
-    </script>
-
-
-    <script>
 
         let filmObject = {
             id: "{{$filmInfo->id}}",
