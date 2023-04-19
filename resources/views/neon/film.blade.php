@@ -413,11 +413,11 @@
             container.addEventListener("mousemove", showControlContainer)
             container.addEventListener("touchstart", () => {
                 if (controlsContainer.classList.contains("active")) {
-                    clearTimeout(timerContainerShow)
                     controlsContainer.classList.add("show")
                 }
             })
             container.addEventListener("touchend", () => {
+                clearTimeout(timerContainerShow)
                 timerContainerShow = setTimeout(() => {
                     controlsContainer.classList.remove("show")
                 }, 20 * 1000)
