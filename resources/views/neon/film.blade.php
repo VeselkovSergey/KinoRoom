@@ -400,10 +400,6 @@
                 });
             }
 
-            videoElement.addEventListener("click", () => {
-                triggerEvent(playPauseButton, "click")
-            })
-
             let timerContainerShow = null
             const showControlContainer = () => {
                 if (controlsContainer.classList.contains("active")) {
