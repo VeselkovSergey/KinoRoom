@@ -420,7 +420,7 @@
                 clearTimeout(timerContainerShow)
                 timerContainerShow = setTimeout(() => {
                     controlsContainer.classList.remove("show")
-                }, 20 * 1000)
+                }, 10 * 1000)
             })
 
 
