@@ -9,6 +9,9 @@
     <link href="{{asset('assets/styles/helpers.css')}}" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('assets/img/logo.png')}}" type="image/x-icon">
 
+    <meta name="description" content="NeonFilms или Неонфильмс или как еще нас называют neon films или неон фильм, предлаегает фильм или сериал смотреть онлайн в высоком качестве. Подскажет что посмотреть в {{now()->format("Y")}} году и какой фильм посмотреть сегодня, а так же какой сериал посмотреть завтра">
+    <meta name="keywords" content="neonfilms, neon films, неонфилмс, неон филмс, неонфилмз, неон филмз, неонфильмс, неон фильмс, неофильмз, неон фильмз">
+
     <style>
         * {
             margin: 0;
