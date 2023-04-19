@@ -680,11 +680,25 @@
             trashElement.innerHTML = clearRaw
             document.body.append(trashElement);
 
-            const translations = trashElement.querySelector(".translations")
+            let translations = trashElement.querySelector(".translations")
             const translationId = trashElement.querySelector("#translation_id")?.value
-            document.getElementById("iframe").append(translations)
 
             const filesRaw = JSON.parse(trashElement.querySelector("#files").value)
+
+            if (!translations) {
+                translations = document.createElement('div')
+                translations.classList.add("translations")
+                const translationsSelector = document.createElement('select')
+                Object.keys(filesRaw).forEach((translation, index) => {
+                    let translationOption = document.createElement('option')
+                    translationOption.label = "Озвучка " + (index + 1)
+                    translationOption.value = translation
+                    translationsSelector.append(translationOption)
+                })
+                translations.append(translationsSelector)
+            }
+
+            document.getElementById("iframe").append(translations)
 
             trashElement.remove()
 
@@ -878,9 +892,7 @@
             })
 
             document.body.querySelector(".videoContainer").style.height = "100%"
-            if (!translationsSelect && translationId) {
-                createQualitySelector(files[translationId])
-            } else if (!translationsSelect || typeof filesRaw[translationsSelect.value] === "string") {
+            if (!translationsSelect || typeof filesRaw[translationsSelect.value] === "string") {
                 createQualitySelector(files[translationsSelect.value])
                 document.getElementById("iframe").classList.remove("isSerial")
             } else {
