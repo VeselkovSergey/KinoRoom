@@ -407,7 +407,7 @@
                     controlsContainer.classList.add("show")
                     timerContainerShow = setTimeout(() => {
                         controlsContainer.classList.remove("show")
-                    }, 5 * 1000)
+                    }, 10 * 1000)
                 }
             }
             container.addEventListener("mousemove", showControlContainer)
@@ -420,7 +420,7 @@
                 clearTimeout(timerContainerShow)
                 timerContainerShow = setTimeout(() => {
                     controlsContainer.classList.remove("show")
-                }, 5 * 1000)
+                }, 15 * 1000)
             })
 
 
