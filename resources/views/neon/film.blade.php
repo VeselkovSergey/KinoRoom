@@ -428,6 +428,13 @@
             const progressLine = document.body.querySelector(".progress")
             progressLine.addEventListener("change", (event) => {
                 videoElement.currentTime = Number(progressLine.value)
+                progressLineIsBlock = false
+            })
+
+            let progressLineIsBlock = false
+            progressLine.addEventListener("input", (event) => {
+                progressLineIsBlock = true
+                timeContainer.innerHTML = getHumanTime(progressLine.value) + ' / ' + getHumanTime(videoElement.duration)
             })
 
             const volumeLine = document.body.querySelector(".volume-bar input[type='range']")
@@ -453,9 +460,11 @@
             videoElement.volume
 
             videoElement.addEventListener("timeupdate", () => {
+                if (!progressLineIsBlock) {
                 timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
                 progressLine.setAttribute("max", String(videoElement.duration))
-                progressLine.value = videoElement.currentTime
+                    progressLine.value = videoElement.currentTime
+                }
             })
 
             videoElement.addEventListener("ended", () => {
