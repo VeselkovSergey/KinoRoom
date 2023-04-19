@@ -410,6 +410,7 @@
             let timerContainerShow = null
             container.addEventListener("mousemove", showControlContainer)
             container.addEventListener("touchmove", showControlContainer)
+            container.addEventListener("touch", showControlContainer)
 
 
             const timeContainer = document.body.querySelector(".time")
