@@ -681,6 +681,7 @@
             document.body.append(trashElement);
 
             const translations = trashElement.querySelector(".translations")
+            const translationId = trashElement.querySelector("#translation_id")?.value
             document.getElementById("iframe").append(translations)
 
             const filesRaw = JSON.parse(trashElement.querySelector("#files").value)
@@ -818,14 +819,18 @@
                     lastQuality = qualityType
                     qualitySelector.append(qualityOption)
                 })
-                qualitySelector.querySelector(`[label='${(filmObject.was.quality || lastQuality)}']`).selected = true
+                try {
+                    qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).selected = true
+                } catch (e) {
+                    qualitySelector.querySelector(`[label='${(lastQuality)}']`).selected = true
+                }
                 document.getElementById("iframe").append(qualityContainer)
 
                 const seasonsSelector = document.getElementById("iframe").querySelector(".seasons select")
                 const seriesSelector = document.getElementById("iframe").querySelector(".series select")
 
                 updateWatchedTime({
-                    translate: translationsSelect.value,
+                    translate: translationsSelect?.value,
                     season: seasonsSelector?.value,
                     series: seriesSelector?.value,
                     quality: qualitySelector.selectedOptions[0].getAttribute("label"),
@@ -836,7 +841,7 @@
                 clearInterval(timerForTime)
                 timerForTime = setInterval(() => {
                     updateWatchedTime({
-                        translate: translationsSelect.value,
+                        translate: translationsSelect?.value,
                         season: seasonsSelector?.value,
                         series: seriesSelector?.value,
                         quality: qualitySelector.selectedOptions[0].getAttribute("label"),
@@ -850,7 +855,7 @@
                     clearInterval(timerForTime)
                     timerForTime = setInterval(() => {
                         updateWatchedTime({
-                            translate: translationsSelect.value,
+                            translate: translationsSelect?.value,
                             season: seasonsSelector?.value,
                             series: seriesSelector?.value,
                             quality: qualitySelector.selectedOptions[0].getAttribute("label"),
@@ -860,10 +865,10 @@
                 })
             }
 
-            const translationsSelect = translations.querySelector("select")
+            const translationsSelect = translations?.querySelector("select")
             filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
-            updateWatchedTime({translate: translationsSelect.value})
-            translationsSelect.addEventListener("change", () => {
+            updateWatchedTime({translate: (translationsSelect?.value ?? 0)})
+            translationsSelect?.addEventListener("change", () => {
                 updateWatchedTime({season: 0, series: 0, quality: 0, time: 0})
                 if (typeof filesRaw[translationsSelect.value] === "string") {
                     createQualitySelector(files[translationsSelect.value])
@@ -873,7 +878,9 @@
             })
 
             document.body.querySelector(".videoContainer").style.height = "100%"
-            if (typeof filesRaw[translationsSelect.value] === "string") {
+            if (!translationsSelect && translationId) {
+                createQualitySelector(files[translationId])
+            } else if (!translationsSelect || typeof filesRaw[translationsSelect.value] === "string") {
                 createQualitySelector(files[translationsSelect.value])
                 document.getElementById("iframe").classList.remove("isSerial")
             } else {
