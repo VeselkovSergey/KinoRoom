@@ -126,58 +126,6 @@
             height: 100%;
             background-color: black;
         }
-
-        /*#iframe:hover .translations {*/
-        /*    opacity: 1;*/
-        /*}*/
-
-        /*.translations {*/
-        /*    position: absolute;*/
-        /*    top: 10px;*/
-        /*    left: 10px;*/
-        /*    !*opacity: 0;*!*/
-        /*}*/
-
-        /*#iframe:hover .seasons {*/
-        /*    opacity: 1;*/
-        /*}*/
-
-        /*.seasons {*/
-        /*    position: absolute;*/
-        /*    top: 35px;*/
-        /*    left: 10px;*/
-        /*    !*opacity: 0;*!*/
-        /*}*/
-
-        /*#iframe:hover .series {*/
-        /*    opacity: 1;*/
-        /*}*/
-
-        /*.series {*/
-        /*    position: absolute;*/
-        /*    top: 60px;*/
-        /*    left: 10px;*/
-        /*    !*opacity: 0;*!*/
-        /*}*/
-
-        /*#iframe:hover .quality {*/
-        /*    opacity: 1;*/
-        /*}*/
-
-        /*.quality {*/
-        /*    position: absolute;*/
-        /*    top: 35px;*/
-        /*    left: 10px;*/
-        /*    !*opacity: 0;*!*/
-        /*}*/
-
-        /*#iframe.isSerial .controls.quality {*/
-        /*    top: 85px;*/
-        /*}*/
-
-        /*.seasons, .series, .translations, .quality {*/
-        /*    max-width: calc(100% - 20px);*/
-        /*}*/
     </style>
 
     {{--    <script src="https://player.svetacdn.in/storage/default_players/s_v120.js"></script>--}}
@@ -271,7 +219,7 @@
                         }
 
                         .controls {
-                            /*display: none;*/
+                            display: none;
                         }
 
                         .controls.active.show {
