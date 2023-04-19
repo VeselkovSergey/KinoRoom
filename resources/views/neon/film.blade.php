@@ -398,6 +398,7 @@
                 });
             }
 
+            let timerContainerShow = null
             const showControlContainer = () => {
                 if (controlsContainer.classList.contains("active")) {
                     clearTimeout(timerContainerShow)
@@ -407,10 +408,21 @@
                     }, 6000)
                 }
             }
-            let timerContainerShow = null
             container.addEventListener("mousemove", showControlContainer)
-            container.addEventListener("touchmove", showControlContainer)
-            container.addEventListener("touch", showControlContainer)
+            container.addEventListener("touchstart", () => {
+                if (controlsContainer.classList.contains("active")) {
+                    clearTimeout(timerContainerShow)
+                    controlsContainer.classList.add("show")
+                    // timerContainerShow = setTimeout(() => {
+                    //     controlsContainer.classList.remove("show")
+                    // }, 10000)
+                }
+            })
+            container.addEventListener("touchend", () => {
+                timerContainerShow = setTimeout(() => {
+                    controlsContainer.classList.remove("show")
+                }, 10000)
+            })
 
 
             const timeContainer = document.body.querySelector(".time")
