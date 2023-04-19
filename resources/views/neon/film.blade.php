@@ -137,11 +137,11 @@
     <div class="flex-center mb-20" style="min-height: inherit;">
         <div class="backdrop">
             <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px;">
-                <div class="mb-30 color-white film-title">{{$filmTitle}}</div>
+                <h2 class="mb-30 color-white film-title">{{$filmTitle}}</h2>
                 <div class="flex w-100 container-1">
                     <div>
                         <div class="container-2" style="">
-                            <img src="{{$filmPosterUrl}}" alt="">
+                            <img src="{{$filmPosterUrl}}" alt="Обложка для {{$filmTitle}}">
                         </div>
                         <div style="display: none;">
                             <button class="red-button-with-animate" onclick="searchFilm()" style="min-width: 100%;">
@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="film-desc color-white p-10">{{$filmDescription}}</div>
+                    <p class="film-desc color-white p-10">{{$filmDescription}}</p>
                 </div>
             </div>
         </div>
