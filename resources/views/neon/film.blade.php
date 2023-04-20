@@ -383,7 +383,7 @@
             const controlsContainer = document.body.querySelector(".controls")
 
             if (Hls.isSupported()) {
-                var hls = new Hls();
+                let hls = new Hls();
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
