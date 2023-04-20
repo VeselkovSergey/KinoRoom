@@ -372,11 +372,12 @@
             return `${hours > 0 ? hours + ":" : ""}${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`
         }
 
+        let videoElement = null
         function setVideo(link, container, startTime = 0) {
 
             container.innerHTML = ""
 
-            const videoElement = document.createElement('video');
+            videoElement = document.createElement('video');
             // videoElement.setAttribute("controls", "")
             container.append(videoElement)
 
