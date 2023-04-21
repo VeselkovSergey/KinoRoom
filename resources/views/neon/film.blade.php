@@ -365,6 +365,7 @@
     <script>
 
         const getHumanTime = (rawSeconds) => {
+            rawSeconds = isNaN(rawSeconds) ? 0 : rawSeconds
             const round = Math.round(rawSeconds)
             const hours = Math.trunc(round / 60 / 60)
             const minutes = Math.trunc((round - (hours * 3600)) / 60)
@@ -459,8 +460,6 @@
                 playPauseButton.classList.remove("paused")
             })
 
-            videoElement.volume
-
             videoElement.addEventListener("timeupdate", () => {
                 if (!progressLineIsBlock) {
                     timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
@@ -481,6 +480,12 @@
                 } else {
                     videoElement.pause()
                 }
+            })
+
+            videoElement.addEventListener("click", () => {
+                videoElement.paused
+                    ? videoElement.play()
+                    : videoElement.pause()
             })
 
             const fullScreenButton = document.body.querySelector(".full-screen-button")
