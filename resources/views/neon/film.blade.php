@@ -373,6 +373,20 @@
             return `${hours > 0 ? hours + ":" : ""}${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`
         }
 
+        document.addEventListener("keydown", keyDownTextField, false);
+
+        function keyDownTextField(e) {
+            const keyCode = e.keyCode
+            if (keyCode === 32) {
+                videoElement
+                    ? (videoElement.paused
+                        ? videoElement.play()
+                        : videoElement.pause()
+                    )
+                    : ""
+            }
+        }
+
         let videoElement = null
         function setVideo(link, container, startTime = 0) {
 
