@@ -276,7 +276,7 @@
 
                             <div class="controls" style="position: absolute;color: white;bottom: 10px;width: 100%;">
                                 <div style="padding: 0 15px;">
-                                    <div class="up-control" style="display: flex;margin-bottom: 10px;">
+                                    <div class="up-control" style="display: flex;margin-bottom: 20px;">
                                         <div class="play-pause-button"
                                              style="display: flex;justify-content: center;align-items: center; padding: 8px;border-radius: 30px; cursor: pointer;"
                                              onclick="this.classList.toggle('paused')">
