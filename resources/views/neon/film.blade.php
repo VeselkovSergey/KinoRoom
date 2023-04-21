@@ -482,10 +482,28 @@
                 }
             })
 
+            let timer
             videoElement.addEventListener("click", () => {
-                videoElement.paused
-                    ? videoElement.play()
-                    : videoElement.pause()
+                if (event.detail === 1) {
+                    timer = setTimeout(() => {
+                        console.log(123)
+                        videoElement.paused
+                            ? videoElement.play()
+                            : videoElement.pause()
+                    }, 200)
+                }
+            })
+
+            videoElement.addEventListener("dblclick", (event) => {
+                clearTimeout(timer)
+                const bounding = videoElement.getBoundingClientRect()
+                const leftSideStart = bounding.left
+                const middle = bounding.left + (bounding.width / 2)
+                if (event.clientX > leftSideStart && event.clientX < middle) {
+                    videoElement.currentTime -= 15
+                } else {
+                    videoElement.currentTime += 15
+                }
             })
 
             const fullScreenButton = document.body.querySelector(".full-screen-button")
