@@ -375,14 +375,16 @@
         document.addEventListener("keydown", keyDownTextField, false);
 
         function keyDownTextField(e) {
+            if (!videoElement) {
+                return
+            }
             const keyCode = e.keyCode
-            if (keyCode === 32) {
-                videoElement
-                    ? (videoElement.paused
-                        ? videoElement.play()
-                        : videoElement.pause()
-                    )
-                    : ""
+            if (keyCode === 32) {   // space
+                videoElement.paused ? videoElement.play() : videoElement.pause()
+            } else if (keyCode === 39) {    //arrow right
+                videoElement.currentTime += 10
+            } else if (keyCode === 37) {    // arrow left
+                videoElement.currentTime -= (videoElement.currentTime < 10 ? videoElement.currentTime : 10)
             }
         }
 
