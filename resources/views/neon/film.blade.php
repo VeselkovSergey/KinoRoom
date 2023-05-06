@@ -498,15 +498,15 @@
             })
 
             // let timer
-            videoElement.addEventListener("click", () => {
-                // if (event.detail === 1) {
-                //     timer = setTimeout(() => {
-                        videoElement.paused
-                            ? videoElement.play()
-                            : videoElement.pause()
-                    // }, 200)
-                // }
-            })
+            // videoElement.addEventListener("click", () => {
+            //     // if (event.detail === 1) {
+            //     //     timer = setTimeout(() => {
+            //             videoElement.paused
+            //                 ? videoElement.play()
+            //                 : videoElement.pause()
+            //         // }, 200)
+            //     // }
+            // })
 
             // videoElement.addEventListener("dblclick", (event) => {
             //     clearTimeout(timer)
