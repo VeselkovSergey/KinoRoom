@@ -192,6 +192,7 @@
                         .play-pause-button:hover,
                         .volume-container:hover,
                         .full-screen-button:hover,
+                        .picture-in-picture-button:hover,
                         .menu-button:hover {
                             background-color: #80808030;
                         }
@@ -331,6 +332,13 @@
                                                  viewBox="0 0 16 16">
                                                 <path
                                                     d="M0 12.5v-9A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5zM2.5 4a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 1 0V5h2.5a.5.5 0 0 0 0-1h-3zm11 8a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-1 0V11h-2.5a.5.5 0 0 0 0 1h3z"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="picture-in-picture-button"
+                                             style="display: flex; justify-content: center; align-items: center; padding: 8px;border-radius: 30px; cursor:pointer;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pip" viewBox="0 0 16 16">
+                                                <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5v-9zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+                                                <path d="M8 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-3z"/>
                                             </svg>
                                         </div>
                                         <div class="menu-button" style="display: flex; justify-content: center; align-items: center; padding: 8px;border-radius: 30px;">
@@ -520,7 +528,13 @@
             //     }
             // })
 
-            const fullScreenButton = document.body.querySelector(".full-screen-button")
+            const pictureInPictureButton = document.body.querySelector(".picture-in-picture-button")
+            pictureInPictureButton.addEventListener("click", () => {
+                videoElement.requestPictureInPicture();
+            })
+
+
+                const fullScreenButton = document.body.querySelector(".full-screen-button")
             fullScreenButton.addEventListener("click", () => {
                 fullScreenButton.fullScreen = !fullScreenButton.fullScreen ?? true
                 if (fullScreenButton.fullScreen) {
