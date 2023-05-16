@@ -277,7 +277,7 @@
                             </div>
 
                             <div class="controls" style="position: absolute;color: white;bottom: 10px;width: 100%;">
-                                <div style="padding: 0 15px;">
+                                <div style="padding: 15px;">
                                     <div class="up-control" style="display: flex;margin-bottom: 20px;">
                                         <div class="play-pause-button"
                                              style="display: flex;justify-content: center;align-items: center; padding: 8px;border-radius: 30px; cursor: pointer;"
@@ -533,45 +533,58 @@
                 videoElement.requestPictureInPicture();
             })
 
+            const setFullScreen = () => {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen({
+                        navigationUI: "hide"
+                    })
+                } else if (iframe.requestFullScreen) {
+                    iframe.requestFullScreen({
+                        navigationUI: "hide"
+                    });
+                } else if (iframe.mozRequestFullScreen) {
+                    iframe.mozRequestFullScreen({
+                        navigationUI: "hide"
+                    });
+                } else if (iframe.webkitRequestFullScreen) {
+                    iframe.webkitRequestFullScreen({
+                        navigationUI: "hide"
+                    });
+                } else if (iframe.msRequestFullscreen) {
+                    iframe.msRequestFullscreen();
+                }
+            }
+
+            const exitFullScreen = () => {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen()
+                } else if (document.exitFullscreen) {
+                    document.exitFullscreen()
+                } else if (document.cancelFullscreen) {
+                    document.cancelFullscreen()
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen()
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen()
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen()
+                }
+            }
+
+
 
                 const fullScreenButton = document.body.querySelector(".full-screen-button")
             fullScreenButton.addEventListener("click", () => {
                 fullScreenButton.fullScreen = !fullScreenButton.fullScreen ?? true
                 if (fullScreenButton.fullScreen) {
                     if (iframe.requestFullScreen || iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen || iframe.msRequestFullscreen) {
-                        if (iframe.requestFullscreen) {
-                            iframe.requestFullscreen({
-                                navigationUI: "hide"
-                            })
-                        } else if (iframe.requestFullScreen) {
-                            iframe.requestFullScreen({
-                                navigationUI: "hide"
-                            });
-                        } else if (iframe.mozRequestFullScreen) {
-                            iframe.mozRequestFullScreen({
-                                navigationUI: "hide"
-                            });
-                        } else if (iframe.webkitRequestFullScreen) {
-                            iframe.webkitRequestFullScreen({
-                                navigationUI: "hide"
-                            });
-                        } else if (iframe.msRequestFullscreen) {
-                            iframe.msRequestFullscreen();
-                        }
+                        setFullScreen()
                     }
                 } else {
-                    if (document.cancelFullScreen) {
-                        document.cancelFullScreen()
-                    } else if (document.exitFullscreen) {
-                        document.exitFullscreen()
-                    } else if (document.cancelFullscreen) {
-                        document.cancelFullscreen()
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen()
-                    } else if (document.webkitCancelFullScreen) {
-                        document.webkitCancelFullScreen()
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen()
+                    try {
+                        exitFullScreen()
+                    } catch (e) {
+                        setFullScreen()
                     }
                 }
             })
