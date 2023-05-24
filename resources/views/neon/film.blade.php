@@ -226,8 +226,6 @@
                             color: white;
                             bottom: 10px;
                             width: 100%;
-
-                            z-index: 1;
                         }
 
                         .controls.active.show,
@@ -434,7 +432,7 @@
             }
 
             videoElement.addEventListener("waiting", (event) => {
-                LoaderShow(document.getElementById('iframe'))
+                LoaderShow(container)
             })
             videoElement.addEventListener("canplay", (event) => {
                 LoaderHide()
