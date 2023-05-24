@@ -175,6 +175,10 @@
             width: 100%;
             height: 100%;
             position: absolute;
+
+            top: 0;
+            left: 0;
+
         }
         .lds-ring {
             /*
@@ -319,7 +323,13 @@
             let loader = document.createElement("div");
             loader.className = 'loader';
             loader.innerHTML = '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>';
-            parent ? parent.append(loader) : document.body.prepend(loader);
+            if (parent) {
+                if (!parent.querySelector('.loader')) {
+                    parent.append(loader)
+                }
+            } else {
+                document.body.prepend(loader);
+            }
         }
 
         function LoaderHide() {

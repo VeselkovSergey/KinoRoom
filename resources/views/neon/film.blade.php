@@ -221,6 +221,13 @@
 
                         .controls {
                             display: none;
+
+                            position: absolute;
+                            color: white;
+                            bottom: 10px;
+                            width: 100%;
+
+                            z-index: 1;
                         }
 
                         .controls.active.show,
@@ -276,7 +283,7 @@
                                 </div>
                             </div>
 
-                            <div class="controls" style="position: absolute;color: white;bottom: 10px;width: 100%;">
+                            <div class="controls">
                                 <div style="padding: 15px;">
                                     <div class="up-control" style="display: flex;margin-bottom: 20px;">
                                         <div class="play-pause-button"
@@ -406,6 +413,7 @@
             container.append(videoElement)
 
             const controlsContainer = document.body.querySelector(".controls")
+            controlsContainer.classList.add("active")
 
             if (Hls.isSupported()) {
                 let hls = new Hls();
@@ -424,6 +432,13 @@
                     controlsContainer.classList.add("active")
                 });
             }
+
+            videoElement.addEventListener("waiting", (event) => {
+                LoaderShow(document.getElementById('iframe'))
+            })
+            videoElement.addEventListener("canplay", (event) => {
+                LoaderHide()
+            })
 
             let timerContainerShow = null
             const showControlContainer = () => {
