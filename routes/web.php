@@ -182,6 +182,52 @@ Route::get('/', function () {
 
         })->name('film');
 
+        Route::get('/get-iframe-content', function () {
+            $ch = curl_init();
+
+// 2. The URL containing the iframe
+
+            $url = "http://53906.svetacdn.in/tQ7mudXLQUUG/movie/11666";
+            $url = "http:" . request()->get("iframeSrc");
+
+// 3. set the options, including the url
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+//curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+            curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+//    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+//    'Accept-Encoding: gzip, deflate, br',
+//    'Accept-Language: ru,en;q=0.9,en-GB;q=0.8,en-US;q=0.7',
+//    'Cache-Control: no-cache',
+//    'Pragma: no-cache',
+
+                'Referer: http://test.local/',
+
+//    'Sec-Ch-Ua: "Not.A/Brand";v="8", "Chromium";v="114", "Microsoft Edge";v="114"',
+//    'Sec-Ch-Ua-Mobile: ?0',
+//    'Sec-Ch-Ua-Platform: "Windows"',
+//    'Sec-Fetch-Dest: iframe',
+//    'Sec-Fetch-Mode: navigate',
+//    'Sec-Fetch-Site: cross-site',
+//    'Upgrade-Insecure-Requests: 1',
+//    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.58',
+            ]);
+
+// 4. execute and fetch the resulting HTML output by putting into $output
+
+            $output = curl_exec($ch);
+
+// 5. free up the curl handle
+
+            curl_close($ch);
+
+            return $output;
+        })->name('get-iframe-content');//->middleware('auth');
+
 //    });
 
 //});

@@ -689,7 +689,8 @@
             useNewMethod && document.body.querySelector('.preview-poster')?.remove()
             LoaderShow(document.getElementById('iframe'))
 
-            fetch('https:' + iframeSrc + '?api_token=' + VIDEO_CDN_API_TOKEN)
+            // fetch('https:' + iframeSrc + '?api_token=' + VIDEO_CDN_API_TOKEN)
+            fetch('{{route("get-iframe-content")}}' + "?iframeSrc=" + iframeSrc)
                 .then((response) => {
                     response.text()
                         .then((raw) => {
