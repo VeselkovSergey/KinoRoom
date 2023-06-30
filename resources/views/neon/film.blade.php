@@ -430,7 +430,10 @@
                     controlsContainer.classList.add("active")
                 });
                 hls.on(Hls.Events.ERROR, function (error, data) {
-                    alert("Ошибка воспроизведения. Попробуйте другой перевод.")
+                    // console.log(error, data)
+                    if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+                        alert("Ошибка воспроизведения. Попробуйте другой перевод.")
+                    }
                 });
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
