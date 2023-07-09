@@ -28,7 +28,10 @@ Route::any('/git-pull', function () {
 })->name('git-pull');
 
 Route::get('/get-analytics', function () {
-    return view("analytics", ["analytics" => \App\Models\Analytics::all()]);
+    $fromDate = request()->get('date') ?? now();
+    $fromDate = \Carbon\Carbon::parse($fromDate)->startOfDay();
+    $analytics = \App\Models\Analytics::where('created_at', '>=', $fromDate)->get();
+    return view("analytics", ["analytics" => $analytics]);
 })->name("analytics");
 
 Route::get('/analytics-detail/{id}', function () {
