@@ -433,7 +433,7 @@
                     // console.log(error, data)
                     //https://github.com/video-dev/hls.js/blob/master/docs/API.md#fifth-step-error-handling
                     if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
-                        alert("Ошибка воспроизведения. Попробуйте другой перевод.")
+                        FlashMessage("Ошибка воспроизведения. Попробуйте другой перевод.")
                     }
                 });
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {

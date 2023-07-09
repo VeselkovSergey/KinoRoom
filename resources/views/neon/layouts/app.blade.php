@@ -339,6 +339,50 @@
             }
         }
     </script>
+    <style>
+        .flash-message-container {
+            top: 100px;
+            right: 25px;
+            cursor: pointer;
+            position: fixed;
+            z-index: 5;
+        }
+        .flash-message-container .flash-message-text {
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #000000;
+            padding: 5px 25px;
+            max-width: 250px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function FlashMessage(message, autoClose = true, timeout = 3000, containerForFlashMessage = document.body) {
+            let flashMessageContainer = containerForFlashMessage.querySelector('.flash-message-container');
+            if (!flashMessageContainer) {
+                flashMessageContainer = document.createElement('div');
+                flashMessageContainer.className = 'flash-message-container';
+                containerForFlashMessage.prepend(flashMessageContainer);
+            }
+
+            let newMessage = document.createElement('div');
+            newMessage.classList.add('flash-message-text');
+            newMessage.innerHTML = message;
+            flashMessageContainer.append(newMessage);
+            if (autoClose) {
+                setTimeout(() => {
+                    newMessage.remove();
+                    if (flashMessageContainer.childNodes.length === 0) {
+                        flashMessageContainer.remove();
+                    }
+                }, timeout);
+            }
+
+            newMessage.addEventListener('click', () => {
+                newMessage.remove();
+            });
+        }
+    </script>
 </head>
 <body>
 
