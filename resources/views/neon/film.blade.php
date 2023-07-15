@@ -897,6 +897,7 @@
                 Object.keys(seasons).forEach((index) => {
                     let seasonOption = document.createElement('option')
                     seasonOption.label = `${Number(index) + 1} сезон`
+                    seasonOption.textContent = `${Number(index) + 1} сезон`
                     seasonOption.value = index
                     if (index === (filmObject.was.season || "0")) {
                         seasonOption.selected = true
@@ -925,6 +926,7 @@
                 Object.keys(series).forEach((index) => {
                     let seasonOption = document.createElement('option')
                     seasonOption.label = `${Number(index) + 1} серия`
+                    seasonOption.textContent = `${Number(index) + 1} серия`
                     seasonOption.value = index
                     if (index === (filmObject.was.series || "0")) {
                         seasonOption.selected = true
@@ -952,6 +954,7 @@
                 Object.keys(qualityArr).forEach((qualityType) => {
                     let qualityOption = document.createElement('option')
                     qualityOption.label = qualityType
+                    qualityOption.textContent = qualityType
                     qualityOption.value = qualityArr[qualityType]
                     lastQuality = qualityType
                     qualitySelector.append(qualityOption)
