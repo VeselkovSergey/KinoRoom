@@ -457,6 +457,7 @@
             videoElement.setAttribute("autoplay", "")
             if (isSafari) {
                 videoElement.setAttribute("muted", "")
+                videoElement.setAttribute("playsinline", "")
             }
             container.append(videoElement)
 
