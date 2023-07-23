@@ -398,7 +398,7 @@
         </div>
     </div>
 
-    <div class="was-watch">
+    <div class="was-watch" style="color: white; background-color: black;">
 
     </div>
 
