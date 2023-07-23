@@ -445,8 +445,8 @@
 
                     if (isSafari) {
                         setTimeout(() => {
-                            alert(123)
-                        }, 10000)
+                            alert(111)
+                        }, 1000)
                     }
 
                     videoElement.play();
@@ -465,6 +465,11 @@
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
+                    if (isSafari) {
+                        setTimeout(() => {
+                            alert(222)
+                        }, 1000)
+                    }
                     videoElement.play();
                     if (!isSafari) {
                         videoElement.currentTime = Number(startTime)
