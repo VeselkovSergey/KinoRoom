@@ -427,8 +427,8 @@
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    videoElement.play();
                     if (!isSafari) {
-                        videoElement.play();
                         videoElement.currentTime = Number(startTime)
                     }
                     controlsContainer.classList.add("active")
