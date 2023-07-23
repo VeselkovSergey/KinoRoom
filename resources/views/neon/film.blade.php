@@ -426,6 +426,12 @@
 
         let videoElement = null
 
+        if (isSafari) {
+            setTimeout(() => {
+                alert(123)
+            }, 10000)
+        }
+
         function setVideo(link, container, startTime = 0) {
 
             container.innerHTML = ""
