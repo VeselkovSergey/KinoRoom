@@ -382,6 +382,8 @@
 
     <script>
 
+        const isSafari = navigator.userAgent.toLowerCase().indexOf('mac') !== -1
+
         const getHumanTime = (rawSeconds) => {
             rawSeconds = isNaN(rawSeconds) ? 0 : rawSeconds
             const round = Math.round(rawSeconds)
@@ -510,13 +512,15 @@
                 playPauseButton.classList.remove("paused")
             })
 
-            videoElement.addEventListener("timeupdate", () => {
-                if (!progressLineIsBlock) {
-                    timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
-                    progressLine.setAttribute("max", String(videoElement.duration))
-                    progressLine.value = videoElement.currentTime
-                }
-            })
+            if (!isSafari) {
+                videoElement.addEventListener("timeupdate", () => {
+                    if (!progressLineIsBlock) {
+                        timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
+                        progressLine.setAttribute("max", String(videoElement.duration))
+                        progressLine.value = videoElement.currentTime
+                    }
+                })
+            }
 
             videoElement.addEventListener("ended", () => {
                 triggerEvent(document.body, "customEndedVideo")
