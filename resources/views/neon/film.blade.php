@@ -478,20 +478,6 @@
                 }, 15 * 1000)
             })
 
-
-            const timeContainer = document.body.querySelector(".time")
-            const progressLine = document.body.querySelector(".progress")
-            progressLine.addEventListener("change", (event) => {
-                videoElement.currentTime = Number(progressLine.value)
-                progressLineIsBlock = false
-            })
-
-            let progressLineIsBlock = false
-            progressLine.addEventListener("input", (event) => {
-                progressLineIsBlock = true
-                timeContainer.innerHTML = getHumanTime(progressLine.value) + ' / ' + getHumanTime(videoElement.duration)
-            })
-
             const volumeLine = document.body.querySelector(".volume-bar input[type='range']")
             volumeLine.addEventListener("input", () => {
                 videoElement.muted = false
@@ -513,6 +499,20 @@
             })
 
             if (!isSafari) {
+
+                const timeContainer = document.body.querySelector(".time")
+                const progressLine = document.body.querySelector(".progress")
+                progressLine.addEventListener("change", (event) => {
+                    videoElement.currentTime = Number(progressLine.value)
+                    progressLineIsBlock = false
+                })
+
+                let progressLineIsBlock = false
+                progressLine.addEventListener("input", (event) => {
+                    progressLineIsBlock = true
+                    timeContainer.innerHTML = getHumanTime(progressLine.value) + ' / ' + getHumanTime(videoElement.duration)
+                })
+
                 videoElement.addEventListener("timeupdate", () => {
                     if (!progressLineIsBlock) {
                         timeContainer.innerHTML = getHumanTime(videoElement.currentTime) + ' / ' + getHumanTime(videoElement.duration)
