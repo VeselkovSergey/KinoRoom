@@ -837,7 +837,6 @@
 
         const generateVideoContainer = (raw) => {
             putWatched()
-            document.body.querySelector('.was-watch').innerHTML = JSON.stringify(filmObject.was)
             const clearRaw = raw.replace(/\n/g, '')
                 .replaceAll(/link/g, 'link-bac')
                 .replaceAll(/script/g, 'script-bac')
@@ -1027,6 +1026,7 @@
 
                 clearInterval(timerForTime)
                 timerForTime = setInterval(() => {
+                    document.body.querySelector('.was-watch').innerHTML = JSON.stringify(filmObject.was)
                     updateWatchedTime({
                         translate: translationsSelect?.value,
                         season: seasonsSelector?.value,
