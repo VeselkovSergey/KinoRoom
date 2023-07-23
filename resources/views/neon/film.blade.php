@@ -1048,7 +1048,10 @@
             }
 
             const translationsSelect = translations?.querySelector("select")
-            filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
+            // filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
+            if (filmObject.was.translate) {
+                translationsSelect.querySelector(`option[value="${filmObject.was.translate}"]`).setAttribute("selected", "selected")
+            }
             updateWatchedTime({translate: (translationsSelect?.value ?? 0)})
             translationsSelect?.addEventListener("change", () => {
                 updateWatchedTime({season: 0, series: 0, quality: 0, time: 0})
