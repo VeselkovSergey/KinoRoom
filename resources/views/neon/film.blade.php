@@ -427,8 +427,10 @@
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    videoElement.play();
-                    videoElement.currentTime = Number(startTime)
+                    if (!isSafari) {
+                        videoElement.play();
+                        videoElement.currentTime = Number(startTime)
+                    }
                     controlsContainer.classList.add("active")
                 });
                 hls.on(Hls.Events.ERROR, function (error, data) {
@@ -442,7 +444,9 @@
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
                     videoElement.play();
-                    videoElement.currentTime = Number(startTime)
+                    if (!isSafari) {
+                        videoElement.currentTime = Number(startTime)
+                    }
                     controlsContainer.classList.add("active")
                 });
             }
