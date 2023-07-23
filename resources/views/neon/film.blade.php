@@ -233,6 +233,10 @@
                             display: block;
                         }
 
+                        .up-control {
+                            margin-bottom: 20px;
+                        }
+
                         .up-control > *:not(:last-child) {
                             margin-right: 20px;
                         }
@@ -262,6 +266,10 @@
 
                         .controls.for-safari {
                             bottom: 0;
+                        }
+
+                        .controls.for-safari .up-control {
+                            margin-bottom: 0;
                         }
 
                         .controls.for-safari .time,
@@ -295,7 +303,7 @@
 
                             <div class="controls">
                                 <div style="padding: 15px;">
-                                    <div class="up-control" style="display: flex;margin-bottom: 20px;">
+                                    <div class="up-control" style="display: flex;">
                                         <div class="play-pause-button"
                                              style="display: flex;justify-content: center;align-items: center; padding: 8px;border-radius: 30px; cursor: pointer;"
                                              onclick="this.classList.toggle('paused')">
