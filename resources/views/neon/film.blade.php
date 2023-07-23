@@ -463,6 +463,9 @@
                         videoElement.muted = false
                     }
                     controlsContainer.classList.add("active")
+                    setInterval(() => {
+                        videoElement.play()
+                    }, 1000)
                 });
                 hls.on(Hls.Events.ERROR, function (error, data) {
                     // console.log(error, data)
