@@ -432,6 +432,7 @@
 
             videoElement = document.createElement('video');
             // videoElement.setAttribute("controls", "")
+            videoElement.setAttribute("autoplay", "")
             container.append(videoElement)
 
             const controlsContainer = document.body.querySelector(".controls")
@@ -443,11 +444,9 @@
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
 
-                    videoElement.play();
+                    // videoElement.play();
                     if (!isSafari) {
                         videoElement.currentTime = Number(startTime)
-                    } else {
-                        triggerEvent(playPauseButton, "click")
                     }
                     controlsContainer.classList.add("active")
                 });
@@ -461,11 +460,9 @@
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
-                    videoElement.play();
+                    // videoElement.play();
                     if (!isSafari) {
                         videoElement.currentTime = Number(startTime)
-                    } else {
-                        triggerEvent(playPauseButton, "click")
                     }
                     controlsContainer.classList.add("active")
                 });
