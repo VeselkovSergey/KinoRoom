@@ -488,8 +488,8 @@
             } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
-                    // videoElement.play();
                     if (isFirstSetTime) {
+                        videoElement.play();
                         isFirstSetTime = false
                         videoElement.currentTime = Number(startTime)
                         videoElement.muted = false
