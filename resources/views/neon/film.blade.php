@@ -265,7 +265,7 @@
                         }
 
                         .controls.for-safari {
-                            bottom: 0;
+                            /*bottom: 0;*/
                         }
 
                         .controls.for-safari .up-control {
