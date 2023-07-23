@@ -956,31 +956,30 @@
                 })
                 setVideo(qualitySelector.value, document.body.querySelector(".videoContainer"), filmObject.was.time)
 
-                clearInterval(timerForTime)
-                timerForTime = setInterval(() => {
-                    document.body.querySelector('.was-watch').innerHTML = JSON.stringify(filmObject.was)
-                    updateWatchedTime({
-                        translate: translationsSelect?.value,
-                        season: seasonsSelector?.value,
-                        series: seriesSelector?.value,
-                        quality: qualitySelector.selectedOptions[0].getAttribute("label"),
-                        time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
-                    })
-                }, 5000)
+                // clearInterval(timerForTime)
+                // timerForTime = setInterval(() => {
+                //     updateWatchedTime({
+                //         translate: translationsSelect?.value,
+                //         season: seasonsSelector?.value,
+                //         series: seriesSelector?.value,
+                //         quality: qualitySelector.selectedOptions[0].getAttribute("label"),
+                //         time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
+                //     })
+                // }, 5000)
 
                 qualitySelector.addEventListener("change", () => {
                     setVideo(qualitySelector.value, document.body.querySelector(".videoContainer"), filmObject.was.time)
 
-                    clearInterval(timerForTime)
-                    timerForTime = setInterval(() => {
-                        updateWatchedTime({
-                            translate: translationsSelect?.value,
-                            season: seasonsSelector?.value,
-                            series: seriesSelector?.value,
-                            quality: qualitySelector.selectedOptions[0].getAttribute("label"),
-                            time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
-                        })
-                    }, 5000)
+                    // clearInterval(timerForTime)
+                    // timerForTime = setInterval(() => {
+                    //     updateWatchedTime({
+                    //         translate: translationsSelect?.value,
+                    //         season: seasonsSelector?.value,
+                    //         series: seriesSelector?.value,
+                    //         quality: qualitySelector.selectedOptions[0].getAttribute("label"),
+                    //         time: document.body.querySelector(".videoContainer").querySelector('video').currentTime,
+                    //     })
+                    // }, 5000)
                 })
             }
 
