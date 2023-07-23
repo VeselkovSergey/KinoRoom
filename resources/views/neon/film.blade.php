@@ -398,6 +398,10 @@
         </div>
     </div>
 
+    <div class="was-watch">
+
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <script>
@@ -833,6 +837,7 @@
 
         const generateVideoContainer = (raw) => {
             putWatched()
+            document.body.querySelector('.was-watch').innerHTML = JSON.stringify(filmObject.was)
             const clearRaw = raw.replace(/\n/g, '')
                 .replaceAll(/link/g, 'link-bac')
                 .replaceAll(/script/g, 'script-bac')
