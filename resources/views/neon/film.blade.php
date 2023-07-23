@@ -426,12 +426,6 @@
 
         let videoElement = null
 
-        if (isSafari) {
-            setTimeout(() => {
-                alert(123)
-            }, 10000)
-        }
-
         function setVideo(link, container, startTime = 0) {
 
             container.innerHTML = ""
@@ -448,6 +442,13 @@
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
+
+                    if (isSafari) {
+                        setTimeout(() => {
+                            alert(123)
+                        }, 10000)
+                    }
+
                     videoElement.play();
                     if (!isSafari) {
                         videoElement.currentTime = Number(startTime)
