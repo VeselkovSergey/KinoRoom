@@ -260,6 +260,18 @@
                             margin-bottom: 5px;
                         }
 
+                        .controls.for-safari {
+                            bottom: 0;
+                        }
+
+                        .controls.for-safari .time,
+                        .controls.for-safari .volume-container,
+                        .controls.for-safari .full-screen-button,
+                        .controls.for-safari .picture-in-picture-button,
+                        .controls.for-safari .progress-bar {
+                            display: none;
+                        }
+
                     </style>
 
                     <div class="iframe-container">
@@ -384,8 +396,7 @@
 
         const isSafari = navigator.userAgent.toLowerCase().indexOf('mac') !== -1
         if (isSafari) {
-            document.body.querySelector('.progress-bar').style.display = "none"
-            document.body.querySelector('.controls').style.bottom = "0px"
+            document.body.querySelector('.controls').classList.add('for-safari')
         }
 
         const getHumanTime = (rawSeconds) => {
