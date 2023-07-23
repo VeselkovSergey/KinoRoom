@@ -441,6 +441,9 @@
             videoElement = document.createElement('video');
             // videoElement.setAttribute("controls", "")
             videoElement.setAttribute("autoplay", "")
+            if (isSafari) {
+                videoElement.setAttribute("muted", "")
+            }
             container.append(videoElement)
 
             const controlsContainer = document.body.querySelector(".controls")
