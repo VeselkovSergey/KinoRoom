@@ -474,7 +474,7 @@
                     if (isFirstSetTime) {
                         isFirstSetTime = false
                         videoElement.currentTime = Number(startTime)
-                        videoElement.muted = false
+                        // videoElement.muted = false
                     }
                     controlsContainer.classList.add("active")
                 });
@@ -492,7 +492,7 @@
                         videoElement.play();
                         isFirstSetTime = false
                         videoElement.currentTime = Number(startTime)
-                        videoElement.muted = false
+                        // videoElement.muted = false
                     }
                     controlsContainer.classList.add("active")
                 });
