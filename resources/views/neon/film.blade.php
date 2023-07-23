@@ -988,6 +988,8 @@
 
             let timerForTime = null
 
+            document.body.querySelector('.was-watch').innerHTML = localStorage.getItem("watched")
+
             const createQualitySelector = (qualityArr) => {
                 document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".quality")?.remove()
                 let qualityContainer = document.createElement('div')
