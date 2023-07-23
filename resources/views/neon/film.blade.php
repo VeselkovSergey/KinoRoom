@@ -416,7 +416,7 @@
 
         const isSafari = navigator.userAgent.toLowerCase().indexOf('mac') !== -1
         if (isSafari) {
-            document.body.querySelector('.controls').classList.add('for-safari')
+            // document.body.querySelector('.controls').classList.add('for-safari')
         }
 
         const getHumanTime = (rawSeconds) => {
