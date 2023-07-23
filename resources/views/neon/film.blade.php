@@ -280,6 +280,10 @@
                             display: none!important;
                         }
 
+                        .controls.for-safari .menu-button {
+                            margin-left: auto;
+                        }
+
                     </style>
 
                     <div class="iframe-container">
@@ -371,7 +375,7 @@
                                             </svg>
                                         </div>
                                         <div class="menu-button"
-                                             style="display: flex; justify-content: center; align-items: center; padding: 8px;border-radius: 30px; margin-left: auto;">
+                                             style="display: flex; justify-content: center; align-items: center; padding: 8px;border-radius: 30px;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                  fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
                                                 <path
@@ -405,6 +409,10 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <script>
+
+        function triggerEvent(elem, event) {
+            elem.dispatchEvent(new Event(event));
+        }
 
         const isSafari = navigator.userAgent.toLowerCase().indexOf('mac') !== -1
         if (isSafari) {
@@ -734,16 +742,12 @@
                 });
         }
 
-        const useNewMethod = true
-
-        // const useNewMethod = false
-
         function parseVideoFiles(data) {
 
-            const iframeSrc = data.iframe_src;
+            const iframeSrc = data.iframe_src
 
-            useNewMethod && document.body.querySelector('.preview-poster')?.remove()
-            LoaderShow(document.getElementById('iframe'))
+            document.body.querySelector(".preview-poster")?.remove()
+            LoaderShow(document.getElementById("iframe"))
 
             // fetch('https:' + iframeSrc + '?api_token=' + VIDEO_CDN_API_TOKEN)
             fetch('{{route("get-iframe-content")}}' + "?iframeSrc=" + iframeSrc)
@@ -752,74 +756,10 @@
                         .then((raw) => {
 
                             // new method
-                            if (useNewMethod) {
-                                generateVideoContainer(raw)
-                                return
-                            }
+                            generateVideoContainer(raw)
+                        })
+                })
 
-                            const domain = data.iframe_src.split("/")
-
-                            if (!domain[2]) {
-                                alert('Что то сломалось')
-                            }
-
-                            {{--let newIframe = raw.replace(/\n/g, '').replace('rek_array', '{{asset('assets/js/videocdn.js')}}');--}}
-                            let newIframe = raw.replace(/\n/g, '')
-                                .replaceAll('"/Assets', '"//' + domain[2] + '/Assets')
-                            // .replaceAll('head', 'div')
-                            // .replaceAll('body', 'div')
-
-                            // let math1 = newIframe.match(/<html[^>]+>(.*)<\/html>/);
-                            let math1 = newIframe.match(/<html>(.*)<\/html>/);
-
-                            document.getElementById('iframe').innerHTML = math1[1];
-                            // document.getElementById('iframe').innerHTML = data.iframe;
-                            LoaderShow(document.getElementById('iframe'))
-
-                            document.getElementById('iframe').querySelector("#rek_array").value = ""
-                            document.getElementById('iframe').querySelector("#host").value = "svetacdn.in"
-                            document.getElementById('iframe').querySelector("#client_id").value = ""
-                            // document.getElementById('iframe').querySelector("#autoplay").value = "1"
-                            document.getElementById('iframe').querySelector("#downloadBtn").value = "0"
-
-                            let count = 1
-                            document.getElementById('iframe').querySelectorAll('script').forEach((element) => {
-                                if (
-                                    !element.src.includes('pj.js')
-                                    && !element.src.includes('fb.js')
-                                    // && !element.src.includes('p2p-media-loader')
-                                    && !element.src.includes('email-decode.min.js')
-                                ) {
-                                    setTimeout(() => {
-                                        let myScript = document.createElement('script');
-                                        myScript.src = element.src
-                                        document.body.append(myScript);
-                                    }, 1 * 1000 * count++)
-                                }
-                            })
-
-                            setTimeout(() => {
-                                let myScript = document.createElement('script');
-                                myScript.src = '{{asset('assets/js/pj.js')}}' + '?v=' + Date.now()
-                                document.body.append(myScript);
-                            }, 1 * 1000 * count++)
-
-                            setTimeout(() => {
-                                LoaderHide()
-                                putWatched()
-                            }, 1 * 1000 * count++)
-
-                            {{--document.body.querySelectorAll('#videocdn_js').forEach((el) => el.remove());--}}
-
-
-                            // iframeContainer.classList.remove('hide');
-                        });
-                });
-
-        }
-
-        function triggerEvent(elem, event) {
-            elem.dispatchEvent(new Event(event));
         }
 
         document.body.addEventListener("customEndedVideo", () => {
@@ -834,8 +774,6 @@
                 triggerEvent(seriesSelector, "change")
             }
         })
-
-        document.body.querySelector('.was-watch').innerHTML = localStorage.getItem("watched")
 
         const generateVideoContainer = (raw) => {
             putWatched()
@@ -865,6 +803,13 @@
                 translations.append(translationsSelector)
             }
 
+            const translationsSelect = translations?.querySelector("select")
+            // filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
+            if (filmObject.was.translate) {
+                translationsSelect.querySelector(`option[selected]`).removeAttribute("selected")
+                translationsSelect.querySelector(`option[value="${filmObject.was.translate}"]`).setAttribute("selected", "selected")
+            }
+
             document.querySelector("#iframe .controls .menu-button .settings-container").append(translations)
 
             trashElement.remove()
@@ -879,21 +824,6 @@
                     qualityType: qualityType,
                     qualityLink: qualityLink
                 }
-            }
-
-            const getQualityLink = (qualityArr) => {
-                if (filmObject.was.quality) return qualityArr[filmObject.was.quality]
-                let currentLink = qualityArr["1080p"]
-                if (!qualityArr["1080p"]) {
-                    currentLink = qualityArr["720p"]
-                } else if (!qualityArr["720p"]) {
-                    currentLink = qualityArr["480p"]
-                } else if (!qualityArr["480p"]) {
-                    currentLink = qualityArr["360p"]
-                } else if (!qualityArr["360p"]) {
-                    currentLink = qualityArr["240p"]
-                }
-                return currentLink
             }
 
             Object.keys(filesRaw).forEach((translation) => {
@@ -1054,12 +984,6 @@
                 })
             }
 
-            const translationsSelect = translations?.querySelector("select")
-            // filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
-            if (filmObject.was.translate) {
-                translationsSelect.querySelector(`option[selected]`).removeAttribute("selected")
-                translationsSelect.querySelector(`option[value="${filmObject.was.translate}"]`).setAttribute("selected", "selected")
-            }
             updateWatchedTime({translate: (translationsSelect?.value ?? 0)})
             translationsSelect?.addEventListener("change", () => {
                 updateWatchedTime({season: 0, series: 0, quality: 0, time: 0})
