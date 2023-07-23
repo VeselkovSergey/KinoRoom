@@ -807,7 +807,7 @@
             // filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
             if (filmObject.was.translate) {
                 translationsSelect.querySelector(`option[selected]`).removeAttribute("selected")
-                translationsSelect.querySelector(`option[value="${filmObject.was.translate}"]`).setAttribute("selected", "selected")
+                translationsSelect.querySelector(`option[value="${filmObject.was.translate}"]`).setAttribute("selected", "")
             }
 
             document.querySelector("#iframe .controls .menu-button .settings-container").append(translations)
@@ -875,7 +875,7 @@
                     seasonOption.value = index
                     if (index === (filmObject.was.season || "0")) {
                         seasonOption.selected = true
-                        seasonOption.setAttribute("selected", "selected")
+                        seasonOption.setAttribute("selected", "")
                     }
                     seasonsSelector.append(seasonOption)
                 })
@@ -905,7 +905,7 @@
                     seriesOption.value = index
                     if (index === (filmObject.was.series || "0")) {
                         seriesOption.selected = true
-                        seriesOption.setAttribute("selected", "selected")
+                        seriesOption.setAttribute("selected", "")
                     }
                     seriesSelector.append(seriesOption)
                 })
@@ -936,11 +936,11 @@
                     qualitySelector.append(qualityOption)
                 })
                 try {
-                    qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).selected = true
-                    qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).setAttribute("selected", "selected")
+                    // qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).selected = true
+                    qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).setAttribute("selected", "")
                 } catch (e) {
                     qualitySelector.querySelector(`[label='${(lastQuality)}']`).selected = true
-                    qualitySelector.querySelector(`[label='${(lastQuality)}']`).setAttribute("selected", "selected")
+                    qualitySelector.querySelector(`[label='${(lastQuality)}']`).setAttribute("selected", "")
                 }
                 document.querySelector("#iframe .controls .menu-button .settings-container").append(qualityContainer)
 
