@@ -481,6 +481,9 @@
                         videoElement.muted = false
                     }
                     controlsContainer.classList.add("active")
+                    setInterval(() => {
+                        videoElement.play()
+                    }, 1000)
                 });
             }
 
