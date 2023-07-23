@@ -383,6 +383,10 @@
     <script>
 
         const isSafari = navigator.userAgent.toLowerCase().indexOf('mac') !== -1
+        if (isSafari) {
+            document.body.querySelector('.progress-bar').style.display = "none"
+            document.body.querySelector('.controls').style.bottom = "0px"
+        }
 
         const getHumanTime = (rawSeconds) => {
             rawSeconds = isNaN(rawSeconds) ? 0 : rawSeconds
