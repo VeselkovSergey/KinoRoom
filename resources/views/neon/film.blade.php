@@ -874,7 +874,7 @@
                     seasonOption.textContent = `${Number(index) + 1} сезон`
                     seasonOption.value = index
                     if (index === (filmObject.was.season || "0")) {
-                        // seasonOption.selected = true
+                        seasonOption.selected = true
                         seasonOption.setAttribute("selected", "selected")
                     }
                     seasonsSelector.append(seasonOption)
@@ -904,7 +904,7 @@
                     seriesOption.textContent = `${Number(index) + 1} серия`
                     seriesOption.value = index
                     if (index === (filmObject.was.series || "0")) {
-                        // seriesOption.selected = true
+                        seriesOption.selected = true
                         seriesOption.setAttribute("selected", "selected")
                     }
                     seriesSelector.append(seriesOption)
@@ -936,10 +936,10 @@
                     qualitySelector.append(qualityOption)
                 })
                 try {
-                    // qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).selected = true
+                    qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).selected = true
                     qualitySelector.querySelector(`[label='${(filmObject.was.quality)}']`).setAttribute("selected", "selected")
                 } catch (e) {
-                    // qualitySelector.querySelector(`[label='${(lastQuality)}']`).selected = true
+                    qualitySelector.querySelector(`[label='${(lastQuality)}']`).selected = true
                     qualitySelector.querySelector(`[label='${(lastQuality)}']`).setAttribute("selected", "selected")
                 }
                 document.querySelector("#iframe .controls .menu-button .settings-container").append(qualityContainer)
