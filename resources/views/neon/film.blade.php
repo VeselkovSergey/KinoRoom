@@ -436,6 +436,8 @@
 
         function setVideo(link, container, startTime = 0) {
 
+            let isFirstSetTime = true
+
             container.innerHTML = ""
 
             videoElement = document.createElement('video');
@@ -454,9 +456,9 @@
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-
                     // videoElement.play();
-                    if (!isSafari) {
+                    if (isFirstSetTime) {
+                        isFirstSetTime = false
                         videoElement.currentTime = Number(startTime)
                     }
                     controlsContainer.classList.add("active")
@@ -472,7 +474,8 @@
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
                     // videoElement.play();
-                    if (!isSafari) {
+                    if (isFirstSetTime) {
+                        isFirstSetTime = false
                         videoElement.currentTime = Number(startTime)
                     }
                     controlsContainer.classList.add("active")
