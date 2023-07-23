@@ -289,7 +289,7 @@
                     <div class="iframe-container">
                         <div id="iframe">
                             <div class="videoContainer flex-center">
-
+                                <video src="#"></video>
                             </div>
                             <div class="preview-poster flex-center">
                                 <img class="cp" src="{{asset('preview.jpg')}}" alt="" onclick="searchFilm()">
@@ -450,9 +450,10 @@
 
             let isFirstSetTime = true
 
-            container.innerHTML = ""
+            // container.innerHTML = ""
 
-            videoElement = document.createElement('video');
+            // videoElement = document.createElement('video');
+            videoElement = document.body.querySelector('video');
             // videoElement.setAttribute("controls", "")
             videoElement.setAttribute("autoplay", "")
             if (isSafari) {
