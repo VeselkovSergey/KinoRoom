@@ -453,9 +453,9 @@
             container.innerHTML = ""
 
             videoElement = document.createElement('video');
+            // videoElement.setAttribute("controls", "")
             videoElement.setAttribute("autoplay", "")
             if (isSafari) {
-                videoElement.setAttribute("controls", "")
                 videoElement.setAttribute("muted", "")
                 videoElement.setAttribute("playsinline", "")
                 videoElement.setAttribute("allowfullscreen", "")
