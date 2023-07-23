@@ -437,13 +437,15 @@
             const controlsContainer = document.body.querySelector(".controls")
             controlsContainer.classList.add("active")
 
+
+            if (isSafari) {
+                alert(123)
+            }
+
             if (Hls.isSupported()) {
                 let hls = new Hls();
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
-                if (isSafari) {
-                    alert(123)
-                }
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
                     videoElement.play();
                     if (!isSafari) {
