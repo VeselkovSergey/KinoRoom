@@ -441,10 +441,10 @@
                 let hls = new Hls();
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
+                if (isSafari) {
+                    alert(123)
+                }
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    if (isSafari) {
-                        alert(123)
-                    }
                     videoElement.play();
                     if (!isSafari) {
                         videoElement.currentTime = Number(startTime)
