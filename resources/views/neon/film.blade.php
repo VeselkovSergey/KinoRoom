@@ -269,7 +269,7 @@
                         .controls.for-safari .full-screen-button,
                         .controls.for-safari .picture-in-picture-button,
                         .controls.for-safari .progress-bar {
-                            display: none;
+                            display: none!important;
                         }
 
                     </style>
