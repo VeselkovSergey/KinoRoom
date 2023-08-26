@@ -630,24 +630,6 @@
                 videoElement.requestPictureInPicture();
             })
 
-            document.body.addEventListener('keypress', () => {
-                console.log(
-                    iframe.requestFullscreen,
-                    iframe.requestFullScreen,
-                    iframe.mozRequestFullScreen,
-                    iframe.webkitRequestFullScreen,
-                    iframe.msRequestFullscreen,
-                )
-                console.log(
-                    document.cancelFullScreen,
-                    document.exitFullscreen,
-                    document.mozCancelFullScreen,
-                    iframe.msRequestFullscreen,
-                    document.webkitCancelFullScreen,
-                    document.msExitFullscreen,
-                )
-            })
-
             const setFullScreen = () => {
                 if (iframe.requestFullscreen) {
                     iframe.requestFullscreen({
@@ -690,10 +672,10 @@
                 return window.innerWidth === screen.width
             }
 
-
             const fullScreenButton = document.body.querySelector(".full-screen-button")
             fullScreenButton.addEventListener("click", () => {
-                if (!isFullScreen()) {
+                fullScreenButton.fullScreen = !fullScreenButton.fullScreen ?? true
+                if (fullScreenButton.fullScreen) {
                     if (iframe.requestFullScreen || iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen || iframe.msRequestFullscreen) {
                         setFullScreen()
                     }
