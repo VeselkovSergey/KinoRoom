@@ -408,7 +408,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
+    <style>
+        .no-cursor, .no-cursor * {
+            cursor: none !important;
+        }
+    </style>
+
     <script>
+
+        let timerNoCursor;
+
+        window.addEventListener('mousemove', () => {
+            if (timerNoCursor) {
+                document.documentElement.classList.remove('no-cursor')
+                clearTimeout(timerNoCursor)
+                timerNoCursor = 0
+            }
+
+            timerNoCursor = setTimeout(() => document.documentElement.classList.add('no-cursor'), 3000)
+        });
 
         function triggerEvent(elem, event) {
             elem.dispatchEvent(new Event(event));
