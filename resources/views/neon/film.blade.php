@@ -687,7 +687,7 @@
             }
 
             const isFullScreen = () => {
-                return window.innerHeight === screen.height
+                return window.innerWidth === screen.width
             }
 
 
