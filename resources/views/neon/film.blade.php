@@ -808,7 +808,7 @@
             const translationsSelect = translations?.querySelector("select")
             // filmObject.was.translate && (translationsSelect.value = filmObject.was.translate)
             if (filmObject.was.translate) {
-                translationsSelect.querySelector(`option[selected]`).removeAttribute("selected")
+                translationsSelect.querySelector(`option[selected]`)?.removeAttribute("selected")
                 translationsSelect.querySelector(`option[value="${filmObject.was.translate}"]`).setAttribute("selected", "")
             }
 
