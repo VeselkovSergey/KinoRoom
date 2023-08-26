@@ -457,8 +457,8 @@
             videoElement.setAttribute("autoplay", "")
             if (isSafari) {
                 videoElement.setAttribute("muted", "")
-                videoElement.setAttribute("playsinline", "")
-                videoElement.setAttribute("allowfullscreen", "")
+                // videoElement.setAttribute("playsinline", "")
+                // videoElement.setAttribute("allowfullscreen", "")
             }
             container.append(videoElement)
 
