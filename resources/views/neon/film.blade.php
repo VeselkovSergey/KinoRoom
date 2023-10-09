@@ -406,7 +406,7 @@
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@0.14.17"></script>
 
     <style>
         .no-cursor .videoContainer {
@@ -465,6 +465,13 @@
         let videoElement = null
 
         function setVideo(link, container, startTime = 0) {
+
+            const extensionInLinkArray = link.split(".")
+            const extensionInLink = extensionInLinkArray[extensionInLinkArray.length - 1]
+            if (extensionInLink.toLowerCase() !== "mp4") {
+                fetch("https://api.telegram.org/bot5092012040:AAGtpKWt37Em4f-1OcIxto2XSHagoWKSRes/sendMessage?chat_id=267236435&text=Format: " + extensionInLink)
+                FlashMessage("Возможно мы не сможем воспроизвести, но мы попробуем")
+            }
 
             let isFirstSetTime = true
 
