@@ -483,7 +483,7 @@
             const controlsContainer = document.body.querySelector(".controls")
             controlsContainer.classList.add("active")
 
-            if (Hls.isSupported()) {
+            if (false && Hls.isSupported()) {  //toDo WTF???
                 let hls = new Hls();
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
@@ -503,7 +503,7 @@
                         FlashMessage("Ошибка воспроизведения. Попробуйте другой перевод.")
                     }
                 });
-            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+            } else /*if (videoElement.canPlayType('application/vnd.apple.mpegurl'))*/ {  //toDo WTF???
                 videoElement.src = link;
                 videoElement.addEventListener('canplay', function () {
                     // videoElement.play();
