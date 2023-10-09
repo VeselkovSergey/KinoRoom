@@ -741,12 +741,12 @@
         const iframeContainer = document.body.querySelector('.iframe-container');
 
         function searchFilm() {
-            getFilmFiles("{{$filmImdbId}}", {{$isSerial}}, "{{$filmTitle}}");
+            getFilmFiles("{{$filmImdbId}}", {{$isSerial}}, "{{$filmTitle}}", "{{$filmRawTitle}}");
         }
 
         const VIDEO_CDN_API_TOKEN = '3i40G5TSECmLF77oAqnEgbx61ZWaOYaE';
 
-        function getFilmFiles(imdbId, isSerial, title) {
+        function getFilmFiles(imdbId, isSerial, title, rawTitle) {
             // fetch('https://cdn.svetacdn.in/api/'+(isSerial ? 'tv-series' : 'short')+'?api_token=' + VIDEO_CDN_API_TOKEN + (imdbId ? ('&imdb_id=' + imdbId) : ('&title=' + title)))
             // fetch('https://videocdn.tv/api/'+(isSerial ? 'tv-series' : 'short')+'?api_token=' + VIDEO_CDN_API_TOKEN + (imdbId ? ('&imdb_id=' + imdbId) : ('&title=' + title)))
             fetch('https://videocdn.tv/api/short?api_token=' + VIDEO_CDN_API_TOKEN + (imdbId ? ('&imdb_id=' + imdbId) : ('&title=' + title)))
@@ -762,7 +762,24 @@
                     } else {
                         alert('Нет данных');
                     }
-                });
+                }).catch((error, code) => {
+                fetch('https://videocdn.tv/api/short?api_token=' + VIDEO_CDN_API_TOKEN + ('&title=' + rawTitle))
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+                        if (data?.data[0]?.iframe_src) {
+                            parseVideoFiles(data.data[0]);
+                            // clearFilmsContainer();
+                            // clearFilmInfoContainer();
+                            // clearSerialsContainer();
+                        } else {
+                            alert('Нет данных');
+                        }
+                    }).catch((error, code) => {
+
+                })
+            })
         }
 
         function parseVideoFiles(data) {

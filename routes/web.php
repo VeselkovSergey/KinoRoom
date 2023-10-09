@@ -171,13 +171,14 @@ Route::get('/', function () {
             $filmImdbId = $filmInfoIds->imdb_id;
 
             $filmTitle = ($filmInfo->title ?? $filmInfo->name) . ' (' . ($filmInfo->release_date ?? $filmInfo->first_air_date) . ')';
+            $filmRawTitle = $filmInfo->title ?? $filmInfo->name;
             $filmDescription = $filmInfo->overview;
 
             $filmPosterUrl = $filmInfo->poster_path !== null ? 'https://imagetmdb.com/t/p/w500' . $filmInfo->poster_path : 'https://bpic.588ku.com/back_pic/05/10/88/62598e75d484d19.jpg!/fh/300/quality/90/unsharp/true/compress/true';
             $filmBackDropUrl = $filmInfo->backdrop_path !== null ? 'https://imagetmdb.com/t/p/w1920_and_h800_multi_faces' . $filmInfo->backdrop_path : null;
 
 //            if (request('neon')) {
-                return view('neon.film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmBackDropUrl', 'filmId', 'isSerial', 'filmImdbId', 'filmInfo'));
+                return view('neon.film', compact('filmRawTitle','filmTitle', 'filmDescription', 'filmPosterUrl', 'filmBackDropUrl', 'filmId', 'isSerial', 'filmImdbId', 'filmInfo'));
 //            } else {
 //                return view('film', compact('filmTitle', 'filmDescription', 'filmPosterUrl', 'filmId', 'isSerial'));
 //            }
