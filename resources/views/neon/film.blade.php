@@ -551,7 +551,7 @@
                 clearTimeout(timerContainerShow)
                 timerContainerShow = setTimeout(() => {
                     controlsContainer.classList.remove("show")
-                }, 15 * 1000)
+                }, 5 * 1000)
             })
 
             const volumeLine = document.body.querySelector(".volume-bar input[type='range']")
