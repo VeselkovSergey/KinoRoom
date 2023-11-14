@@ -134,7 +134,7 @@
     {{--    <script src="https://52.svetacdn.in/Assets/pj.js?v=1111"></script>--}}
     {{--    <link rel="stylesheet" href="https://52.svetacdn.in/Assets/iframe.css">--}}
 
-    <div class="flex-center mb-20" style="min-height: inherit;">
+    <div class="flex-center" style="min-height: inherit;">
         <div class="backdrop">
             <div class="flex-column-center w-100 shadow-neon backdrop-shadow" style="border-radius: 20px;">
                 <h2 class="mb-30 color-white film-title">{{$filmTitle}}</h2>
