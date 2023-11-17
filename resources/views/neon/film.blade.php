@@ -490,7 +490,7 @@
             const controlsContainer = document.body.querySelector(".controls")
             controlsContainer.classList.add("active")
 
-            if (false && Hls.isSupported()) {  //toDo WTF???
+            if (extensionInLink.toLowerCase() !== "mp4" && Hls.isSupported()) {  //toDo WTF???
                 let hls = new Hls();
                 hls.loadSource(link);
                 hls.attachMedia(videoElement);
