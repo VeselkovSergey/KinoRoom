@@ -154,8 +154,8 @@ Route::get('/', function () {
             $filmId = request('id');
             $isSerial = request('isSerial');
 
-            $url = 'https://apitmdb.cub.watch/3/' . ($isSerial === 'true' ? 'tv' : 'movie') . '/' . $filmId . '?api_key='.$apiKey.'&language=ru';
-            $urlForId = 'https://apitmdb.cub.watch/3/'.($isSerial === 'true' ? 'tv' : 'movie').'/'.$filmId.'/external_ids?api_key='.$apiKey.'&language=ru';
+            $url = 'https://apitmdb.cub.red/3/' . ($isSerial === 'true' ? 'tv' : 'movie') . '/' . $filmId . '?api_key='.$apiKey.'&language=ru';
+            $urlForId = 'https://apitmdb.cub.red/3/'.($isSerial === 'true' ? 'tv' : 'movie').'/'.$filmId.'/external_ids?api_key='.$apiKey.'&language=ru';
 
             try {
                 $filmInfoRaw = file_get_contents($url);

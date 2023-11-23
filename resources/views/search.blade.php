@@ -106,7 +106,7 @@
         const findFilmsContainer = document.body.querySelector('.find-films-container');
 
         function searchFilms(query) {
-            const SEARCH_API_URL = 'https://apitmdb.cub.watch/3/search/movie?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru&query=';
+            const SEARCH_API_URL = 'https://apitmdb.cub.red/3/search/movie?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru&query=';
 
             fetch(SEARCH_API_URL + query)
                 .then((response) => {
@@ -118,7 +118,7 @@
         }
 
         function searchSerials(query) {
-            const SEARCH_API_URL = 'https://apitmdb.cub.watch/3/search/tv?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru&query=';
+            const SEARCH_API_URL = 'https://apitmdb.cub.red/3/search/tv?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru&query=';
 
             fetch(SEARCH_API_URL + query)
                 .then((response) => {

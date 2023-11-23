@@ -41,7 +41,7 @@
         const iframeContainer = document.body.querySelector('.iframe-container');
 
         function searchFilm() {
-            fetch('https://apitmdb.cub.watch/3/'+"{{($isSerial === 'true' ? 'tv' : 'movie')}}"+'/'+"{{$filmId}}"+'/external_ids?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru')
+            fetch('https://apitmdb.cub.red/3/'+"{{($isSerial === 'true' ? 'tv' : 'movie')}}"+'/'+"{{$filmId}}"+'/external_ids?api_key=4ef0d7355d9ffb5151e987764708ce96&language=ru')
                 .then((response) => {
                     return response.json();
                 })
