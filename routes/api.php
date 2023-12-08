@@ -25,7 +25,6 @@ Route::any('/git-pull', function (Request $request) {
     echo '<pre>' . PHP_EOL;
     echo 'git pull start' . PHP_EOL;
     echo shell_exec('git pull');
-    echo shell_exec('git pull');
     echo 'git pull complete' . PHP_EOL;
 
     echo 'php artisan migrate start' . PHP_EOL;
