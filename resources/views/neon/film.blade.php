@@ -819,6 +819,17 @@
             if ((selectedIndex + 1) <= countOptions) {
                 seriesSelector.selectedIndex = selectedIndex + 1
                 triggerEvent(seriesSelector, "change")
+            } else {
+              const seasonSelector = document.querySelector("#iframe .controls .menu-button .settings-container").querySelector(".seasons select")
+              if (!seasonSelector) {
+                return
+              }
+              const selectedIndex = seasonSelector.selectedIndex
+              const countOptions = seasonSelector.childNodes.length - 1
+              if ((selectedIndex + 1) <= countOptions) {
+                seasonSelector.selectedIndex = selectedIndex + 1
+                triggerEvent(seasonSelector, "change")
+              }
             }
         })
 
