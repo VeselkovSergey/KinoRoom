@@ -187,6 +187,28 @@ Route::get('/film', function () {
 })->name('film');
 
 Route::get('/get-iframe-content', function () {
+
+
+    $iframeUriRaw = request()->get("iframeSrc");
+
+    $domain = explode("/", $iframeUriRaw)[2];
+
+    $path = str_replace("//$domain", "", $iframeUriRaw);
+
+    $ch = curl_init();
+
+
+    $url = "https:" . request()->get("iframeSrc");
+
+    return file_get_contents($url, false, stream_context_create([
+        "http" => [
+            "method" => "GET",
+            "header" =>
+                "Host: $domain\r\n" .
+                "Referer: ya.ru\r\n"
+        ]
+    ]));
+
     $ch = curl_init();
 
 // 2. The URL containing the iframe
