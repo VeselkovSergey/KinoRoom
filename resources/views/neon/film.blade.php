@@ -846,7 +846,7 @@
             let translations = trashElement.querySelector(".translations")
             const translationId = trashElement.querySelector("#translation_id")?.value
 
-            const filesRaw = JSON.parse(trashElement.querySelector("#files").value)
+            const filesRaw = JSON.parse(trashElement.querySelector("#fs").value)
 
             if (!translations) {
                 translations = document.createElement('div')
